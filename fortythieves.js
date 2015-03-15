@@ -1,6 +1,7 @@
 ﻿﻿var ft = {
 	cardNumbers : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
 	cardSuits : ["C", "D", "S", "H"],
+	decks: 2,
 	discardPile: null,
 	drawPile : null,
 	playStacks : [],
@@ -15,16 +16,14 @@
 };
 
 ft.generateDeck = function generateDeck() {
-	var deck, index, i, j;
+	var deck = [];
 
-    deck = new Array(104);
-    index = 0;
-	for (i = 0; i < ft.cardNumbers.length; i++) {
-		for (j = 0; j < ft.cardSuits.length; j++) {
-			deck[index++] = getCard(ft.cardNumbers[i], ft.cardSuits[j]);
-			deck[index++] = getCard(ft.cardNumbers[i], ft.cardSuits[j]);
-		}
-	}
+	_.forEach(ft.cardNumbers, function(cardNumber) {
+		_.forEach(ft.cardSuits, function(cardSuit) {
+			deck.push(getCard(cardNumber, cardSuit));
+			deck.push(getCard(cardNumber, cardSuit));
+		});
+	});
 
 	//one shuffle didnt seem all that random. Similar cards seemed to beright next to each other
 	deck = _(deck).shuffle().shuffle().shuffle().value();
