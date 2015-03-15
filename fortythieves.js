@@ -3,6 +3,7 @@
 	var DrawPile = window.DrawPile;
 	var DiscardPile = window.DiscardPile;
 	var DropZone = window.DropZone;
+	var PlayStack = window.PlayStack;
 
 	var ft = {
 		cardNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
@@ -46,7 +47,7 @@
 		ft.logOn = false;
 
 		for (i = 0; i < 10; i++) {
-			stack = getPlayStack(selector + i);
+			stack = new PlayStack(selector + i, ft);
 
 			ft.playStacks.push(stack);
 
@@ -88,88 +89,6 @@
 			ft.selectedCard.getHtml().removeClass('selectedCard');
 		ft.selectedCard = undefined;
 	}
-
-
-
-
-
-	/*************Play Stack*/
-
-	function getPlayStack(sel) {
-		var selector = sel;
-		var stack = [];
-
-		function setup() {
-			var pile = this;
-			$(selector).click(function () {
-				if (stack.length == 0 && ft.selectedCard && ft.selectedCard.pile) {
-					pile.pushCard(ft.selectedCard.pile.pop());
-				}
-			});
-		}
-
-		function pop() {
-			return stack.pop();
-		}
-
-
-		function peekTop() {
-			if (stack.length == 0)
-				return undefined;
-
-			return stack[stack.length - 1];
-		}
-
-		function pushCard(card) {
-			var cardHtml = card.getHtml();
-			if (stack.length > 0) {
-				cardHtml = cardHtml.css('top', stack.length * 25);
-			}
-			else {
-				cardHtml = cardHtml.css('top', 0);
-			}
-
-			$(selector).append(cardHtml);
-
-			stack.push(card);
-			card.pile = this;
-
-			card.getHtml().click(card.clickHandler());
-
-			ft.undoCount = 0;
-			ft.score++;
-
-		}
-
-		function clickHandler(card) {
-			if (ft.selectedCard != undefined) {
-				if (card.canDropOnOpenCard(ft.selectedCard)) {
-					card.pile.pushCard(ft.selectedCard.pile.pop());
-				}
-				else {
-					//if we cant move, just deselect old card and select new
-					ft.selectedCard.deselect();
-					ft.selectedCard = card;
-					ft.selectedCard.select();
-				}
-			}
-			//if selected card doesnt exist yet, select this one
-			else {
-				ft.selectedCard = card;
-				card.select();
-			}
-		}
-
-		return {
-			pop: pop,
-			peekTop: peekTop,
-			pushCard: pushCard,
-			clickHandler: clickHandler,
-			setup: setup
-		};
-	}
-
-
 
 
 	/******** Card */
