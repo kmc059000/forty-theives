@@ -19,7 +19,7 @@ ft.randOrd = function () {
 }
 
 ft.generateDeck = function() {
-	var deck, index, seed, i, j;
+	var deck, index, i, j;
 
     deck = new Array(104);
     index = 0;
@@ -30,17 +30,8 @@ ft.generateDeck = function() {
 		}
 	}
 
-	//var seed = 13616;
-	//var seed = 49585; //winnable
-	//var seed = 39838; //winnable
-	//var seed = 2033; //winnable
-	seed = Math.round((Math.random() * 100000));
-	
-	$('#infoList').append('<li>Game #: ' + seed + '</li>');
-	
-	Math.seedrandom(seed);
-	
-    deck.sort(ft.randOrd).sort(ft.randOrd).sort(ft.randOrd);
+	//one shuffle didnt seem all that random. Similar cards seemed to beright next to each other
+	deck = _(deck).shuffle().shuffle().shuffle().value();
 
     return deck;
 }
