@@ -1,7 +1,6 @@
 # forty-theives
 browser based card game
-
-[Click to play](http://cdn.rawgit.com/kmc059000/forty-theives/master/fortythieves.html)
+<a href="http://cdn.rawgit.com/kmc059000/forty-theives/master/fortythieves.html" target="_blank">Click here to play</a>
 
 
 ##todo
