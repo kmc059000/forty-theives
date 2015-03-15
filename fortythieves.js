@@ -11,14 +11,10 @@
 	undoCount : 0,
 	timer : null,
 	startTime : new Date(),
-	moves : 0,
+	moves : 0
 };
 
-ft.randOrd = function () {
-    return (Math.round(Math.random()) - 0.5);
-}
-
-ft.generateDeck = function() {
+ft.generateDeck = function generateDeck() {
 	var deck, index, i, j;
 
     deck = new Array(104);
@@ -34,9 +30,9 @@ ft.generateDeck = function() {
 	deck = _(deck).shuffle().shuffle().shuffle().value();
 
     return deck;
-}
+};
 
-ft.deal = function() {
+ft.deal = function deal() {
 	var deck, selector, i, j, stack;
 
     deck = ft.generateDeck();
@@ -77,7 +73,7 @@ ft.deal = function() {
 
 	ft.logOn = true;
 	ft.moves = 0;
-}
+};
 
 
 function deselectSelected()
@@ -92,11 +88,11 @@ function deselectSelected()
 
 /*********** Draw Pile */
 
-var getDrawPile = function(sel) {
+function getDrawPile(sel) {
 	var selector = sel;
 	var stack = [];
 
-	var pushCard = function (card) {
+	function pushCard(card) {
 		stack.push(card);
 		card.pile = this;
 
@@ -109,9 +105,9 @@ var getDrawPile = function(sel) {
 
 			$(selector).append(cardBack);			
 		}
-	};
+	}
 	
-	var draw = function() {	
+	function draw() {
 		var top = stack.pop();
 
 		$(selector).empty();
@@ -119,26 +115,26 @@ var getDrawPile = function(sel) {
 
 		if (nextToTop != undefined) {
 			this.pushCard(nextToTop);
-		};
+		}
 		
 		ft.moves++;
 		return top;
-	};
+	}
 	
 	return {
 		draw : draw,
-		pushCard : pushCard,
+		pushCard : pushCard
 	}
 }
 
 
 /********Discard Pie ********* */
 
-var getDiscardPile = function(sel){
+function getDiscardPile(sel){
 	var selector = sel;
 	var stack = [];
 	
-	var draw = function () {
+	function draw() {
 		var top = stack.pop();
 
 		var nextToTop = stack.pop();
@@ -150,18 +146,18 @@ var getDiscardPile = function(sel){
 		}
 
 		return top;
-	};
+	}
 	
 	
-	var peekTop = function () {
+	function peekTop() {
 		if (stack.length == 0)
 			return undefined;
 
 		return stack[stack.length - 1];
-	};
+	}
 	
 	
-	var pushCard = function (card) {
+	function pushCard(card) {
 		stack.push(card);
 		card.pile = this;
 		$(selector).append(card.getHtml());
@@ -180,9 +176,9 @@ var getDiscardPile = function(sel){
 		
 		ft.undoCount++;
 		
-	};
+	}
 	
-	var clickHandler = function (card) {
+	function clickHandler(card) {
 		if (ft.selectedCard != undefined) {
 			if (card.canDropOnOpenCard(ft.selectedCard)) {
 				card.pile.pushCard(ft.selectedCard.pile.pop());
@@ -199,46 +195,46 @@ var getDiscardPile = function(sel){
 			ft.selectedCard = card;
 			card.select();
 		}
-	};
+	}
 
 	return {
 		draw : draw,
 		pop : draw,
 		peekTop : peekTop,
 		pushCard : pushCard,
-		clickHandler : clickHandler,
+		clickHandler : clickHandler
 	};
-};
+}
 
 
 /*************Play Stack*/
 
-var getPlayStack = function(sel) {
+function getPlayStack(sel) {
 	var selector = sel;
 	var stack = [];
 	
-	var setup = function() {
+	function setup() {
 		var pile = this;
 		$(selector).click(function () {
 			if (stack.length == 0 && ft.selectedCard && ft.selectedCard.pile) {
 				pile.pushCard(ft.selectedCard.pile.pop());            
 			}
 		});
-	};
+	}
 	
-	var pop = function () {
+	function pop() {
 		return stack.pop();
-	};
+	}
 	
 	
-	var peekTop = function () {
+	function peekTop() {
 		if (stack.length == 0)
 			return undefined;
 
 		return stack[stack.length - 1];
-	};
+	}
 	
-	var pushCard = function (card) {
+	function pushCard(card) {
 		var cardHtml = card.getHtml();
 		if (stack.length > 0) {
 			cardHtml = cardHtml.css('top', stack.length * 25); 
@@ -257,9 +253,9 @@ var getPlayStack = function(sel) {
 		ft.undoCount = 0;
 		ft.moves++;
 		
-	};
+	}
 	
-	var clickHandler = function (card) {
+	function clickHandler(card) {
 		if (ft.selectedCard != undefined) {
 			if (card.canDropOnOpenCard(ft.selectedCard)) {
 				card.pile.pushCard(ft.selectedCard.pile.pop());
@@ -276,16 +272,16 @@ var getPlayStack = function(sel) {
 			ft.selectedCard = card;
 			card.select();
 		}
-	};
+	}
 	
 	return {
 		pop : pop,
 		peekTop : peekTop,
 		pushCard : pushCard,
 		clickHandler : clickHandler,
-		setup : setup,
+		setup : setup
 	};
-};
+}
 
 
 
@@ -295,32 +291,32 @@ var getPlayStack = function(sel) {
 
 /********* Drop Zone ****/
 
-var getDropZone = function(sel) {
+function getDropZone(sel) {
 	var selector = sel;
 	var stack = [];
 	
 	
-	var isFull = function() {
+	function isFull() {
 		return stack.length == 13;
-	};
+	}
 	
-	var peekTop = function () {
+	function peekTop() {
 		var top = stack.pop();
 
 		if (top != undefined)
 			stack.push(top);
 		return top;
-	};
+	}
 	
-	var pop = function () {
+	function pop() {
 		var popped = stack.pop();
 
 		popped.getHtml().click(popped.clickHandler(popped));
 
 		return stack.pop();
-	};
+	}
 	
-	var pushCard = function (card) {
+	function pushCard(card) {
 		var cardHtml = card.getHtml();
 
 		cardHtml = cardHtml.css('top', 0); 
@@ -342,19 +338,18 @@ var getDropZone = function(sel) {
 		
 		if(ft.selectedCard) ft.selectedCard.deselect();
 		ft.moves--;
-		
-	};
+	}
 	
-	var setup = function(){
+	function setup(){
 		var pile = this;
 		$(selector).click(function () {
 			if (stack.length == 0 && (ft.selectedCard != undefined && ft.selectedCard.cardNumber == 1)) {
 				pile.pushCard(ft.selectedCard.pile.pop());
 			}
 		});
-	};
+	}
 	
-	var clickHandler = function (card) {
+	function clickHandler(card) {
 		if (ft.selectedCard != undefined) {
 			if (card.canDropOnDropZoneCard(ft.selectedCard)) {
 				card.pile.pushCard(ft.selectedCard.pile.pop());
@@ -372,8 +367,7 @@ var getDropZone = function(sel) {
 				card.select();
 			}
 		}
-	
-	};
+	}
 	
 	return {
 		peekTop : peekTop,
@@ -381,12 +375,9 @@ var getDropZone = function(sel) {
 		pushCard : pushCard,
 		clickHandler : clickHandler,
 		isFull : isFull,
-		setup : setup,
+		setup : setup
 	};
-	
-	
-	
-};
+}
 
 
 
@@ -400,9 +391,7 @@ var getDropZone = function(sel) {
 
 /******** Card */
 
-
-
-var getCard = function (cardNum, cardS) {
+function getCard(cardNum, cardS) {
 	
 	
     var cardNumber = cardNum;
@@ -412,28 +401,28 @@ var getCard = function (cardNum, cardS) {
 
     var pile;
 	
-	var getHtml = function() {
+	function getHtml() {
 		return html;
-	};
+	}
 	
-	var getBackHtml = function() {
+	function getBackHtml() {
 		return htmlBack;
-	};
+	}
 	
-    var canDropOnZone = function(dropZone) {
+    function canDropOnZone(dropZone) {
         var topCard = zone.peekTop();
         return this.cardNumber - topCard.cardNumber == 1 && cardSuit == topCard.cardSuit;
-    };
+    }
 
-    var canDropOnOpenCard = function (card) {
+    function canDropOnOpenCard(card) {
         return cardNumber - card.cardNumber == 1 && cardSuit == card.cardSuit;
-    };
+    }
 	
-    var canDropOnDropZoneCard = function (card) {
+    function canDropOnDropZoneCard(card) {
         return cardNumber - card.cardNumber == -1 && cardSuit == card.cardSuit;
-    };	
+    }
 	
-	var clickHandler = function () {
+	function clickHandler() {
 		var card = this;
 		return (function () {
 			//ignore click if this is not the top
@@ -442,17 +431,17 @@ var getCard = function (cardNum, cardS) {
 			}
 			card.pile.clickHandler(card);
 		});
-	};
+	}
 	
-	var select = function() {
+	function select() {
 		ft.selectedCard = this;
 		html.addClass('selectedCard');
-	};
+	}
 	
-	var deselect = function() {
+	function deselect() {
 		html.removeClass('selectedCard');
 		ft.selectedCard = undefined;
-	};
+	}
 	
 	return {
 		canDropOnZone : canDropOnZone,
@@ -467,10 +456,9 @@ var getCard = function (cardNum, cardS) {
 		cardSuit : cardSuit,
 		pile : pile
 	};
-};
+}
 
-function undo()
-{	
+function undo() {
 	if(ft.undoCount <= 0 || !ft.discardPile.peekTop()) {
 		alert('INVALID: cannot undo.');
 		return;
@@ -484,23 +472,19 @@ function undo()
 	ft.moves+=5;
 }
 
-function checkForWin()
-{
+function checkForWin() {
 
     for (var i = 0; i < ft.dropZones.length; i++) {
         var dropZone = ft.dropZones[i];
         if(!dropZone.isFull()) return;
     }
 	
-	for(var i=0;i<10;i++)
-	{
+	for(i=0;i<10;i++) {
 		cornify_add();
 	}
-	
 }
 
-function toggleInfo()
-{
+function toggleInfo() {
 	var infoPanel = $('#infoPanel');
 	
 	var off = infoPanel.css('display') == 'none';
@@ -512,13 +496,11 @@ function toggleInfo()
 	$('#btnInfo').html(off ? 'Hide Info' : 'Show Info');
 }
 
-function viewLog()
-{
+function viewLog() {
 	var list = $('#log');
 	list.empty();
 
-	for(var i = 0; i< ft.logs.length; i++)
-	{
+	for(var i = 0; i< ft.logs.length; i++) {
 		list.append('<li>' + ft.logs[i] + '</li>');
 	}
 }
@@ -529,7 +511,7 @@ function newGame() {
 
 function updateStatus() {
 
-//memory leak?
+	//memory leak?
 	var elapsed, elapsedMins, elapsedSecs, 
 		str,
 		seconds, minutes;
