@@ -2,6 +2,7 @@
 
 	var DrawPile = window.DrawPile;
 	var DiscardPile = window.DiscardPile;
+	var DropZone = window.DropZone;
 
 	var ft = {
 		cardNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
@@ -70,7 +71,7 @@
 
 		selector = '#d';
 		for (i = 0; i < 8; i++) {
-			stack = getDropZone(selector + i);
+			stack = new DropZone(selector + i, ft);
 			ft.dropZones.push(stack);
 			stack.setup();
 		}
@@ -169,95 +170,6 @@
 	}
 
 
-	/********* Drop Zone ****/
-
-	function getDropZone(sel) {
-		var selector = sel;
-		var stack = [];
-
-
-		function isFull() {
-			return stack.length == 13;
-		}
-
-		function peekTop() {
-			var top = stack.pop();
-
-			if (top != undefined)
-				stack.push(top);
-			return top;
-		}
-
-		function pop() {
-			var popped = stack.pop();
-
-			popped.getHtml().click(popped.clickHandler(popped));
-
-			return stack.pop();
-		}
-
-		function pushCard(card) {
-			var cardHtml = card.getHtml();
-
-			cardHtml = cardHtml.css('top', 0);
-
-			$(selector).append(cardHtml);
-
-			stack.push(card);
-			card.pile = this;
-
-			for (var i = 0; i < stack.length; i++) {
-				stack[i].getHtml().unbind('click');
-			}
-
-			card.getHtml().click(card.clickHandler(card));
-
-			checkForWin();
-
-			ft.undoCount = 0;
-
-			if (ft.selectedCard) ft.selectedCard.deselect();
-			ft.score--;
-		}
-
-		function setup() {
-			var pile = this;
-			$(selector).click(function () {
-				if (stack.length == 0 && (ft.selectedCard != undefined && ft.selectedCard.cardNumber == 1)) {
-					pile.pushCard(ft.selectedCard.pile.pop());
-				}
-			});
-		}
-
-		function clickHandler(card) {
-			if (ft.selectedCard != undefined) {
-				if (card.canDropOnDropZoneCard(ft.selectedCard)) {
-					card.pile.pushCard(ft.selectedCard.pile.pop());
-
-					//not sure when ft.selectedCard becomes undefined between here and the if above... need to check it out
-					if (ft.selectedCard != undefined) {
-						ft.selectedCard.deselect();
-					}
-				}
-				else {
-					//if we cant move, just deselect old card and select new
-					ft.selectedCard.deselect();
-					ft.selectedCard = card;
-
-					card.select();
-				}
-			}
-		}
-
-		return {
-			peekTop: peekTop,
-			pop: pop,
-			pushCard: pushCard,
-			clickHandler: clickHandler,
-			isFull: isFull,
-			setup: setup
-		};
-	}
 
 
 	/******** Card */
@@ -343,7 +255,7 @@
 		ft.score += 5;
 	}
 
-	function checkForWin() {
+	ft.checkForWin = function checkForWin() {
 
 		for (var i = 0; i < ft.dropZones.length; i++) {
 			var dropZone = ft.dropZones[i];
@@ -353,7 +265,7 @@
 		for (i = 0; i < 10; i++) {
 			cornify_add();
 		}
-	}
+	};
 
 	function toggleInfo() {
 		var infoPanel = $('#infoPanel');
