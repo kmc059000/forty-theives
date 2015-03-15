@@ -1,0 +1,18 @@
+{
+  "name": "forty-thieves",
+  "version": "0.0.0",
+  "homepage": "https://github.com/kmc059000/forty-theives",
+  "authors": [
+    "Kenneth Crawford <kmc059000@gmail.com>"
+  ],
+  "description": "browser based card game",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
