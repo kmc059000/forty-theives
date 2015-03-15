@@ -1,6 +1,7 @@
 ﻿(function() {
 
 	var DrawPile = window.DrawPile;
+	var DiscardPile = window.DiscardPile;
 
 	var ft = {
 		cardNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
@@ -55,9 +56,10 @@
 			stack.setup();
 		}
 
-		ft.discardPile = getDiscardPile('.discardPile');
+		ft.discardPile = new DiscardPile('.discardPile', ft);
 
 		ft.drawPile = new DrawPile('.drawPile', ft.discardPile, ft);
+
 		while (deck.length > 0) {
 			ft.drawPile.pushCard(deck.pop());
 		}
@@ -87,83 +89,7 @@
 	}
 
 
-	/********Discard Pie ********* */
 
-	function getDiscardPile(sel) {
-		var selector = sel;
-		var stack = [];
-
-		function draw() {
-			var top = stack.pop();
-
-			var nextToTop = stack.pop();
-			if (nextToTop != undefined) {
-				this.pushCard(nextToTop);
-			}
-			else {
-				$(selector).empty();
-			}
-
-			return top;
-		}
-
-
-		function peekTop() {
-			if (stack.length == 0)
-				return undefined;
-
-			return stack[stack.length - 1];
-		}
-
-
-		function pushCard(card) {
-			stack.push(card);
-			card.pile = this;
-			$(selector).append(card.getHtml());
-
-			if (ft.selectedCard != undefined)
-				ft.selectedCard.getHtml().removeClass('selectedCard');
-			ft.selectedCard = undefined;
-
-			//remove the click event of all cards
-			for (var i = 0; i < stack.length; i++) {
-				stack[i].getHtml().unbind('click');
-			}
-
-
-			card.getHtml().click(card.clickHandler(card));
-
-			ft.undoCount++;
-
-		}
-
-		function clickHandler(card) {
-			if (ft.selectedCard != undefined) {
-				if (card.canDropOnOpenCard(ft.selectedCard)) {
-					card.pile.pushCard(ft.selectedCard.pile.pop());
-				}
-				else {
-					//if we cant move, just deselect old card and select new
-					ft.selectedCard.deselect();
-					ft.selectedCard = card;
-					ft.selectedCard.select();
-				}
-			}
-			//if selected card doesnt exist yet, select this one
-			else {
-				ft.selectedCard = card;
-				card.select();
-			}
-		}
-
-		return {
-			draw: draw,
-			pop: draw,
-			peekTop: peekTop,
-			pushCard: pushCard,
-			clickHandler: clickHandler
-		};
-	}
 
 
 	/*************Play Stack*/
