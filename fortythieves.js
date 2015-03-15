@@ -1,4 +1,7 @@
 ﻿(function() {
+
+	var DrawPile = window.DrawPile;
+
 	var ft = {
 		cardNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
 		cardSuits: ["C", "D", "S", "H"],
@@ -13,7 +16,7 @@
 		undoCount: 0,
 		timer: null,
 		startTime: new Date(),
-		moves: 0
+		score: 0
 	};
 
 	ft.generateDeck = function generateDeck() {
@@ -21,8 +24,8 @@
 
 		_.forEach(ft.cardNumbers, function (cardNumber) {
 			_.forEach(ft.cardSuits, function (cardSuit) {
-				deck.push(getCard(cardNumber, cardSuit));
-				deck.push(getCard(cardNumber, cardSuit));
+				deck.push(createCard(cardNumber, cardSuit));
+				deck.push(createCard(cardNumber, cardSuit));
 			});
 		});
 
@@ -52,13 +55,15 @@
 			stack.setup();
 		}
 
-		ft.drawPile = getDrawPile('.drawPile');
+		ft.discardPile = getDiscardPile('.discardPile');
+
+		ft.drawPile = new DrawPile('.drawPile', ft.discardPile, ft);
 		while (deck.length > 0) {
 			ft.drawPile.pushCard(deck.pop());
 		}
 
 
-		ft.discardPile = getDiscardPile('.discardPile');
+
 
 
 		selector = '#d';
@@ -71,7 +76,7 @@
 		$("#left, #right").click(deselectSelected);
 
 		ft.logOn = true;
-		ft.moves = 0;
+		ft.score = 0;
 	};
 
 
@@ -79,48 +84,6 @@
 		if (ft.selectedCard != undefined)
 			ft.selectedCard.getHtml().removeClass('selectedCard');
 		ft.selectedCard = undefined;
-	}
-
-
-	/*********** Draw Pile */
-
-	function getDrawPile(sel) {
-		var selector = sel;
-		var stack = [];
-
-		function pushCard(card) {
-			stack.push(card);
-			card.pile = this;
-
-			if ($(selector).is(':empty')) {
-				var cardBack = card.getBackHtml();
-				cardBack.click(function () {
-					var c = card.pile.draw();
-					ft.discardPile.pushCard(c);
-				});
-
-				$(selector).append(cardBack);
-			}
-		}
-
-		function draw() {
-			var top = stack.pop();
-
-			$(selector).empty();
-			var nextToTop = stack.pop();
-
-			if (nextToTop != undefined) {
-				this.pushCard(nextToTop);
-			}
-
-			ft.moves++;
-			return top;
-		}
-
-		return {
-			draw: draw,
-			pushCard: pushCard
-		}
 	}
 
 
@@ -247,7 +210,7 @@
 			card.getHtml().click(card.clickHandler());
 
 			ft.undoCount = 0;
-			ft.moves++;
+			ft.score++;
 
 		}
 
@@ -328,7 +291,7 @@
 			ft.undoCount = 0;
 
 			if (ft.selectedCard) ft.selectedCard.deselect();
-			ft.moves--;
+			ft.score--;
 		}
 
 		function setup() {
@@ -373,7 +336,7 @@
 
 	/******** Card */
 
-	function getCard(cardNum, cardS) {
+	function createCard(cardNum, cardS) {
 
 
 		var cardNumber = cardNum;
@@ -451,7 +414,7 @@
 
 		if (ft.selectedCard)
 			ft.selectedCard.deselect();
-		ft.moves += 5;
+		ft.score += 5;
 	}
 
 	function checkForWin() {
@@ -508,7 +471,7 @@
 		if (elapsedSecs < 10)
 			elapsedSecs = '0' + elapsedSecs;
 
-		str = 'Time: ' + elapsedMins + ':' + elapsedSecs + ' Score: ' + ft.moves;
+		str = 'Time: ' + elapsedMins + ':' + elapsedSecs + ' Score: ' + ft.score;
 
 		$('#lblInfo').text(str);
 
