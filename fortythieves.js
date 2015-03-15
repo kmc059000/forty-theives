@@ -4,6 +4,7 @@
 	var DiscardPile = window.DiscardPile;
 	var DropZone = window.DropZone;
 	var PlayStack = window.PlayStack;
+	var Card = window.Card;
 
 	var ft = {
 		cardNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
@@ -27,8 +28,8 @@
 
 		_.forEach(ft.cardNumbers, function (cardNumber) {
 			_.forEach(ft.cardSuits, function (cardSuit) {
-				deck.push(createCard(cardNumber, cardSuit));
-				deck.push(createCard(cardNumber, cardSuit));
+				deck.push(new Card(cardNumber, cardSuit, ft));
+				deck.push(new Card(cardNumber, cardSuit, ft));
 			});
 		});
 
@@ -90,75 +91,6 @@
 		ft.selectedCard = undefined;
 	}
 
-
-	/******** Card */
-
-	function createCard(cardNum, cardS) {
-
-
-		var cardNumber = cardNum;
-		var cardSuit = cardS;
-		var html = $('<div class=\'card ' + cardSuit + '\'> <div class=\'cardsize _' + cardNumber + '\'> </div></div>');
-		var htmlBack = $('<div class=\'cardBack\'></div>');
-
-		var pile;
-
-		function getHtml() {
-			return html;
-		}
-
-		function getBackHtml() {
-			return htmlBack;
-		}
-
-		function canDropOnZone(dropZone) {
-			var topCard = zone.peekTop();
-			return this.cardNumber - topCard.cardNumber == 1 && cardSuit == topCard.cardSuit;
-		}
-
-		function canDropOnOpenCard(card) {
-			return cardNumber - card.cardNumber == 1 && cardSuit == card.cardSuit;
-		}
-
-		function canDropOnDropZoneCard(card) {
-			return cardNumber - card.cardNumber == -1 && cardSuit == card.cardSuit;
-		}
-
-		function clickHandler() {
-			var card = this;
-			return (function () {
-				//ignore click if this is not the top
-				if (card.pile.peekTop() != card) {
-					return;
-				}
-				card.pile.clickHandler(card);
-			});
-		}
-
-		function select() {
-			ft.selectedCard = this;
-			html.addClass('selectedCard');
-		}
-
-		function deselect() {
-			html.removeClass('selectedCard');
-			ft.selectedCard = undefined;
-		}
-
-		return {
-			canDropOnZone: canDropOnZone,
-			canDropOnOpenCard: canDropOnOpenCard,
-			canDropOnDropZoneCard: canDropOnDropZoneCard,
-			clickHandler: clickHandler,
-			getHtml: getHtml,
-			getBackHtml: getBackHtml,
-			select: select,
-			deselect: deselect,
-			cardNumber: cardNumber,
-			cardSuit: cardSuit,
-			pile: pile
-		};
-	}
 
 	function undo() {
 		if (ft.undoCount <= 0 || !ft.discardPile.peekTop()) {
