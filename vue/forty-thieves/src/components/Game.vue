@@ -6,7 +6,7 @@
 		<div id="body">
       <actions :score="score"></actions>
       <top-stacks></top-stacks>
-      <!--<bottom-stacks></bottom-stacks>-->
+      <bottom-stacks></bottom-stacks>
     </div>
 		<div id="right">
 		</div>
@@ -16,12 +16,14 @@
 import Messages from './Messages'
 import Actions from './Actions'
 import TopStacks from './TopStacks'
+import BottomStacks from './BottomStacks'
 
 export default {
   components: {
     Messages,
     Actions,
-    TopStacks
+    TopStacks,
+    BottomStacks
   },
   data () {
     return {
