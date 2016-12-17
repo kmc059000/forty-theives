@@ -1,28 +1,23 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+    <game></game>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+import Game from './components/Game'
 
 export default {
   name: 'app',
   components: {
-    Hello
+    Game
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+    background-color: Green;
+	  color: White;
 }
 </style>
