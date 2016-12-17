@@ -14,13 +14,13 @@
 </template>
 
 <script>
-export default {
-  name: 'top-stacks',
-  data () {
-    return {
+  export default {
+    name: 'top-stacks',
+    data () {
+      return {
+      }
     }
   }
-}
 </script>
 <style scoped>
 

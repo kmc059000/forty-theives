@@ -17,6 +17,9 @@ import Messages from './Messages'
 import Actions from './Actions'
 import TopStacks from './TopStacks'
 import BottomStacks from './BottomStacks'
+import store from '../store/index.js'
+
+console.log(store)
 
 export default {
   components: {
