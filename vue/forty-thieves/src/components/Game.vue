@@ -1,10 +1,10 @@
 <template>
-  <div id="wrapper"> 
+  <div id="wrapper">
 		<div id="left">
       <messages></messages>
     </div>
 		<div id="body">
-      <actions :score="score"></actions>
+      <actions></actions>
       <top-stacks></top-stacks>
       <bottom-stacks></bottom-stacks>
     </div>
@@ -17,9 +17,6 @@ import Messages from './Messages'
 import Actions from './Actions'
 import TopStacks from './TopStacks'
 import BottomStacks from './BottomStacks'
-import store from '../store/index.js'
-
-console.log(store)
 
 export default {
   components: {
@@ -30,8 +27,10 @@ export default {
   },
   data () {
     return {
-      score: 0
     }
+  },
+  created () {
+    this.$store.commit('deal')
   }
 }
 </script>
@@ -119,7 +118,6 @@ export default {
 .cardBack
 {
     background-color: Black;
-    position: absolute;
 }
 
 #infoPanel

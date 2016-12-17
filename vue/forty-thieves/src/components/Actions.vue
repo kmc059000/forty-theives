@@ -4,12 +4,12 @@
       <button @click="newGame">New Game</button>
       <button @click="undo">Undo</button>
       <button @click="showInfo">Show Info</button>
-      
+
       <span id="lblInfo">
         Time: {{elapsedMins}}:{{elapsedSecs}} Score: {{score}}
       </span>
     </div>
-        
+
     <div id="infoPanel">
       <button id="btnViewLog">Refresh Log</button>
       <ul id='log'>
@@ -19,15 +19,19 @@
 </template>
 
 <script>
+import { mapState } from 'Vuex'
+
 export default {
-  props: ['score'],
   data () {
     return {
-      startTime: new Date(),
       elapsedMins: 0,
       elapsedSecs: 0
     }
   },
+  computed: mapState([
+    'score',
+    'startTime'
+  ]),
   methods: {
     newGame () {
       console.info('start new game')
@@ -42,6 +46,10 @@ export default {
       let seconds = 1000
       let minutes = seconds * 60
 
+      if (!this.startTime) {
+        return
+      }
+
       let elapsed = new Date().getTime() - this.startTime.getTime()
       this.elapsedMins = Math.floor(elapsed / minutes)
       this.elapsedSecs = Math.floor((elapsed / seconds) % 60)
@@ -52,7 +60,6 @@ export default {
     }
   },
   created () {
-    debugger
     setInterval(this.updateStatus.bind(this), 100)
   }
 }
