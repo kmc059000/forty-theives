@@ -8,7 +8,6 @@
 <script>
   import { mapState } from 'vuex'
   export default {
-    props: ['drawPile'],
     data () {
       return {
       }
@@ -24,7 +23,7 @@
     },
     methods: {
       select () {
-        this.$store.dispatch('selectDrawPile')
+        this.$store.dispatch('drawCard')
       }
     }
   }

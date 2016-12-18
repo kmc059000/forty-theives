@@ -111,7 +111,7 @@ export default {
     background-color: White;
     position: absolute;
     background-color: White;
-    background-image: url(/assets/sprite.png);
+    background-image: url(/static/sprite.png);
     background-repeat: no-repeat;
 }
 
@@ -170,7 +170,7 @@ export default {
 
 ._1, ._2, ._3, ._4, ._5, ._6, ._7, ._8, ._9, ._10, ._11, ._12, ._13
 {
-    background-image: url(/sprite.png);
+    background-image: url(/static/sprite.png)
 }
 
 .H

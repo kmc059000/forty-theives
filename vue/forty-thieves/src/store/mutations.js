@@ -89,3 +89,14 @@ export const selectDrawPile = function (state) {
   deselectAll()
   state.drawPile.select()
 }
+
+export const drawCard = function (state) {
+  deselectAll()
+
+  var card = state.drawPile.draw()
+
+  if (card) {
+    state.discardPile.push(card)
+    state.score++
+  }
+}

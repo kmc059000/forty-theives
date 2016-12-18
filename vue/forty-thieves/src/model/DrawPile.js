@@ -17,4 +17,10 @@ export default class DrawPile {
   select () {
     this.selected = !this.selected
   }
+
+  draw () {
+    if (this._stack.length) {
+      return this._stack.pop()
+    }
+  }
 }
