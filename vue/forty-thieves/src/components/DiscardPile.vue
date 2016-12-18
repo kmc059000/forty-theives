@@ -2,50 +2,30 @@
   <div>
     <div :class="{'discardPile': true, 'selectedCard' : this.discardPile.selected }"
         @click="select">
-        <div v-if="anyCards" :class="suitClasses">
-          <div :class="numberClasses"></div>
-        </div>
+        <card v-if="anyCards" :card="card">
+        </card>
     </div>
   </div>
 </template>
 
 <script>
   import { mapState } from 'vuex'
+  import Card from './Card'
 
   export default {
     data () {
       return {
       }
     },
+    components: {
+      Card
+    },
     computed: {
       anyCards: function () {
         return this.discardPile.anyCards()
       },
-      suitClasses: function () {
-        var card = this.discardPile.topCard()
-
-        var obj = {
-          card: true
-        }
-
-        if (card) {
-          obj[card.cardSuit] = true
-        }
-
-        return obj
-      },
-      numberClasses: function () {
-        var card = this.discardPile.topCard()
-
-        var obj = {
-          cardsize: true
-        }
-
-        if (card) {
-          obj['_' + card.cardNumber] = true
-        }
-
-        return obj
+      card: function () {
+        return this.discardPile.topCard()
       },
       ...mapState([
         'discardPile'

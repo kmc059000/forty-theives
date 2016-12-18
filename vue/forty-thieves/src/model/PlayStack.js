@@ -8,4 +8,12 @@ export default class PlayStack {
     stack.push(card)
     card.pile = this
   }
+
+  anyCards () {
+    return !!this._stack.length
+  }
+
+  cards () {
+    return this._stack
+  }
 }
