@@ -59,7 +59,7 @@ export default {
       height: 800px;
     float: left;
   }
-  .dropStack, .dropStackFull, .dropStackFull, .drawPile, .discardPile, .cardStack
+  .dropStack, .dropStackFull, .dropStackFull, .drawStack, .discardStack, .cardStack
 {
     height: 104px;
     width: 70px;
@@ -87,7 +87,7 @@ export default {
     border: 4px solid Aqua;
 }
 
-.dropStack, .dropStackFull, .dropStackFull, .drawPile, .discardPile, .cardStack
+.dropStack, .dropStackFull, .dropStackFull, .drawStack, .discardStack, .cardStack
 {
     margin: 3px;
     position: relative;

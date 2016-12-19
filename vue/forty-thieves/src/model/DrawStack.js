@@ -1,13 +1,13 @@
-export default class DrawPile {
-  constructor (discardPile) {
+export default class DrawStack {
+  constructor (discardStack) {
     this._stack = []
-    this._discardPile = discardPile
+    this._discardStack = discardStack
     this.selected = false
   }
 
   pushCard (card) {
     this._stack.push(card)
-    card.pile = this
+    card.stack = this
   }
 
   anyCards () {

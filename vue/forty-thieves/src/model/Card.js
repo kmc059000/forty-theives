@@ -3,7 +3,9 @@ export default class Card {
     this.cardNumber = cardNum
     this.cardSuit = cardS
 
-    this.pile = null
+    this.stack = null
+
+    this.selected = false
   }
 
   canDropOnOpenCard (card) {

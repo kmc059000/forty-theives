@@ -16,8 +16,8 @@ const state = {
   count: 0,
   history: [],
 
-  discardPile: null,
-  drawPile: null,
+  discardStack: null,
+  drawStack: null,
   playStacks: [],
   dropStacks: [],
   selectedCard: undefined,

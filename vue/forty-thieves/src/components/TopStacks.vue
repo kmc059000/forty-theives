@@ -2,21 +2,21 @@
   <div id="topPanel">
     <drop-stack v-for="(dropStack, index) in dropStacks" :stack="dropStack" :index="index">
     </drop-stack>
-    <draw-pile></draw-pile>
-    <discard-pile></draw-pile>
+    <draw-stack></draw-stack>
+    <discard-stack></draw-stack>
   </div>
 </template>
 
 <script>
   import { mapState } from 'vuex'
   import DropStack from './DropStack'
-  import DrawPile from './DrawPile'
-  import DiscardPile from './DiscardPile'
+  import DrawStack from './DrawStack'
+  import DiscardStack from './DiscardStack'
   export default {
     name: 'top-stacks',
     components: {
-      DrawPile,
-      DiscardPile,
+      DrawStack,
+      DiscardStack,
       DropStack
     },
     data () {
@@ -24,8 +24,8 @@
       }
     },
     computed: mapState([
-      'drawPile',
-      'discardPile',
+      'drawStack',
+      'discardStack',
       'dropStacks'
     ])
   }

@@ -6,7 +6,7 @@ export default class PlayStack {
     var stack = this._stack
 
     stack.push(card)
-    card.pile = this
+    card.stack = this
   }
 
   anyCards () {

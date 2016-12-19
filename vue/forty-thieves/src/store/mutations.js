@@ -1,8 +1,8 @@
 import _ from 'lodash'
 import Card from '../model/Card'
 import PlayStack from '../model/PlayStack'
-import DiscardPile from '../model/DiscardPile'
-import DrawPile from '../model/DrawPile'
+import DiscardStack from '../model/DiscardStack'
+import DrawStack from '../model/DrawStack'
 import DropStack from '../model/DropStack'
 
 export const increment = state => {
@@ -40,11 +40,11 @@ export const deal = (state) => {
     }
   }
 
-  state.discardPile = new DiscardPile()
-  state.drawPile = new DrawPile(state.discardPile)
+  state.discardStack = new DiscardStack()
+  state.drawStack = new DrawStack(state.discardStack)
 
   while (deck.length > 0) {
-    state.drawPile.pushCard(deck.pop())
+    state.drawStack.pushCard(deck.pop())
   }
 
   for (i = 0; i < 8; i++) {
@@ -81,22 +81,37 @@ function generateDeck () {
   return deck
 }
 
-export const deselectAll = function (state) {
+export const deselect = function (state) {
+  if (state.selectedCard) {
+    state.selectedCard.selected = false
+  }
 
-}
-
-export const selectDrawPile = function (state) {
-  deselectAll()
-  state.drawPile.select()
+  state.selectedCard = null
 }
 
 export const drawCard = function (state) {
-  deselectAll()
-
-  var card = state.drawPile.draw()
+  deselect(state)
+  var card = state.drawStack.draw()
 
   if (card) {
-    state.discardPile.push(card)
+    state.discardStack.push(card)
     state.score++
+  }
+}
+
+export const selectDiscardStack = function (state) {
+  var card = state.discardStack.topCard()
+
+  if (card) {
+    if (card === state.selectedCard) {
+      deselect(state)
+    } else {
+      if (state.selectedCard) {
+        deselect(state)
+      }
+
+      card.selected = true
+      state.selectedCard = card
+    }
   }
 }

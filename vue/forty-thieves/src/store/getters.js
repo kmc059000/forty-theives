@@ -11,6 +11,6 @@ export const recentHistory = state => {
     .replace(/,/g, ', ')
 }
 
-export const anyCardsInDrawPile = state => {
-  return state.drawPile.anyCards()
+export const anyCardsInDrawStack = state => {
+  return state.drawStack.anyCards()
 }

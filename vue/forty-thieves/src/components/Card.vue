@@ -16,7 +16,8 @@
     computed: {
       suitClasses: function () {
         var obj = {
-          card: true
+          card: true,
+          'selectedCard': this.card.selected
         }
 
         if (this.card) {

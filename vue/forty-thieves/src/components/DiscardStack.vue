@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :class="{'discardPile': true, 'selectedCard' : this.discardPile.selected }"
+    <div :class="{'discardStack': true, 'selectedCard' : this.discardStack.selected }"
         @click="select">
         <card v-if="anyCards" :card="card">
         </card>
@@ -22,18 +22,18 @@
     },
     computed: {
       anyCards: function () {
-        return this.discardPile.anyCards()
+        return this.discardStack.anyCards()
       },
       card: function () {
-        return this.discardPile.topCard()
+        return this.discardStack.topCard()
       },
       ...mapState([
-        'discardPile'
+        'discardStack'
       ])
     },
     methods: {
       select () {
-        this.$store.dispatch('selectDiscardPile')
+        this.$store.dispatch('selectDiscardStack')
       }
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :class="{'drawPile': true, 'cardBack': this.anyCards, 'selectedCard' : this.drawPile.selected }"
+    <div :class="{'drawStack': true, 'cardBack': this.anyCards, 'selectedCard' : this.drawStack.selected }"
         @click="select"></div>
   </div>
 </template>
@@ -15,10 +15,10 @@
     computed: {
       anyCards: function () {
         // return false
-        return this.drawPile.anyCards()
+        return this.drawStack.anyCards()
       },
       ...mapState([
-        'drawPile'
+        'drawStack'
       ])
     },
     methods: {
