@@ -42,8 +42,6 @@ export const deal = (state) => {
     state.dropStacks.push(stack)
   }
 
-  // $("#left, #right").click(deselectSelected)
-
   state.logOn = true
   state.score = 0
 }
@@ -128,8 +126,6 @@ export const selectPlayStack = function (state, playStackIndex) {
 }
 
 export const selectDropStack = function (state, dropStackIndex) {
-  console.log('select drop stack', dropStackIndex)
-
   var dropStack = state.dropStacks[dropStackIndex]
   var card = dropStack.topCard()
 
