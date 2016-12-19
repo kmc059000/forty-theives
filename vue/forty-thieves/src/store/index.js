@@ -19,7 +19,7 @@ const state = {
   discardPile: null,
   drawPile: null,
   playStacks: [],
-  dropZones: [],
+  dropStacks: [],
   selectedCard: undefined,
   logOn: false,
   logs: [],

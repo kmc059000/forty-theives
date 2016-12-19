@@ -3,7 +3,7 @@ import Card from '../model/Card'
 import PlayStack from '../model/PlayStack'
 import DiscardPile from '../model/DiscardPile'
 import DrawPile from '../model/DrawPile'
-import DropZone from '../model/DropZone'
+import DropStack from '../model/DropStack'
 
 export const increment = state => {
   state.count++
@@ -48,8 +48,8 @@ export const deal = (state) => {
   }
 
   for (i = 0; i < 8; i++) {
-    stack = new DropZone(i)
-    state.dropZones.push(stack)
+    stack = new DropStack(i)
+    state.dropStacks.push(stack)
   }
 
   // $("#left, #right").click(deselectSelected)

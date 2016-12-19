@@ -1,13 +1,7 @@
 <template>
   <div id="topPanel">
-    <div class="dropZone" id="d0"></div>
-    <div class="dropZone" id="d1"></div>
-    <div class="dropZone" id="d2"></div>
-    <div class="dropZone" id="d3"></div>
-    <div class="dropZone" id="d4"></div>
-    <div class="dropZone" id="d5"></div>
-    <div class="dropZone" id="d6"></div>
-    <div class="dropZone" id="d7"></div>
+    <drop-stack v-for="(dropStack, index) in dropStacks" :stack="dropStack" :index="index">
+    </drop-stack>
     <draw-pile></draw-pile>
     <discard-pile></draw-pile>
   </div>
@@ -15,13 +9,15 @@
 
 <script>
   import { mapState } from 'vuex'
+  import DropStack from './DropStack'
   import DrawPile from './DrawPile'
   import DiscardPile from './DiscardPile'
   export default {
     name: 'top-stacks',
     components: {
       DrawPile,
-      DiscardPile
+      DiscardPile,
+      DropStack
     },
     data () {
       return {
@@ -29,7 +25,8 @@
     },
     computed: mapState([
       'drawPile',
-      'discardPile'
+      'discardPile',
+      'dropStacks'
     ])
   }
 </script>

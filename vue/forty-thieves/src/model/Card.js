@@ -10,7 +10,7 @@ export default class Card {
     return this.cardNumber - card.cardNumber === 1 && this.cardSuit === card.cardSuit
   }
 
-  canDropOnDropZoneCard (card) {
+  canDropOnDropStackCard (card) {
     return this.cardNumber - card.cardNumber === -1 && this.cardSuit === card.cardSuit
   }
 }
