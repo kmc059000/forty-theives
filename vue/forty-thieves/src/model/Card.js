@@ -13,6 +13,10 @@ export default class Card {
   }
 
   canDropOnDropStackCard (card) {
-    return this.cardNumber - card.cardNumber === -1 && this.cardSuit === card.cardSuit
+    if (!card) {
+      return this.cardNumber === 1
+    }
+
+    return this.cardNumber - card.cardNumber === 1 && this.cardSuit === card.cardSuit
   }
 }

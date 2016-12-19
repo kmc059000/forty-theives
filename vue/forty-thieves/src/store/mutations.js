@@ -137,6 +137,27 @@ export const selectPlayStack = function (state, playStackIndex) {
   }
 }
 
+export const selectDropStack = function (state, dropStackIndex) {
+  console.log('select drop stack', dropStackIndex)
+
+  var dropStack = state.dropStacks[dropStackIndex]
+  var card = dropStack.topCard()
+
+  var previousCard = state.selectedCard
+
+  if (previousCard) {
+    if (card === previousCard) {
+      deselect(state)
+    } else {
+      if (previousCard && previousCard.canDropOnDropStackCard(card)) {
+        move(state, previousCard, dropStack)
+      } else {
+        selectCard(state, card, dropStack)
+      }
+    }
+  }
+}
+
 function move (state, card, newStack) {
   state.selectedStack.popCard()
 

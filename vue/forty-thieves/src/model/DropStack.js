@@ -17,7 +17,7 @@ export default class DropStack {
     this.selected = !this.selected
   }
 
-  push (card) {
+  pushCard (card) {
     if (card) {
       this._stack.push(card)
     }

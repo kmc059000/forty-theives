@@ -6,12 +6,6 @@ import * as mutations from './mutations'
 
 Vue.use(Vuex)
 
-// const statics = {
-//     cardNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
-//     cardSuits: ["C", "D", "S", "H"],
-//     decks: 2,
-// }
-
 const state = {
   count: 0,
   history: [],

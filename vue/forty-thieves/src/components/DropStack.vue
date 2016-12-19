@@ -1,9 +1,7 @@
 <template>
-  <div class="dropStack">
-    <div @click="select">
-        <card v-if="anyCards" :card="card">
-        </card>
-    </div>
+  <div class="dropStack" @click="select">
+    <card v-if="anyCards" :card="card">
+    </card>
   </div>
 </template>
 
@@ -23,8 +21,8 @@
       anyCards: function () {
         return this.stack.anyCards()
       },
-      cards: function () {
-        return this.stack.cards()
+      card: function () {
+        return this.stack.topCard()
       }
     },
     methods: {
