@@ -3,6 +3,10 @@ export default class DiscardStack {
     this._stack = []
   }
 
+  popCard (card) {
+    return this._stack.pop()
+  }
+
   topCard () {
     if (this._stack.length) {
       return this._stack[this._stack.length - 1]

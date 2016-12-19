@@ -87,6 +87,7 @@ export const deselect = function (state) {
   }
 
   state.selectedCard = null
+  state.selectedStack = null
 }
 
 export const drawCard = function (state) {
@@ -112,6 +113,42 @@ export const selectDiscardStack = function (state) {
 
       card.selected = true
       state.selectedCard = card
+      state.selectedStack = state.discardStack
     }
   }
+}
+
+export const selectPlayStack = function (state, playStackIndex) {
+  var playStack = state.playStacks[playStackIndex]
+  var card = playStack.topCard()
+
+  var previousCard = state.selectedCard
+
+  if (card) {
+    if (card === previousCard) {
+      deselect(state)
+    } else {
+      if (previousCard && card.canDropOnOpenCard(previousCard)) {
+        move(state, previousCard, playStack)
+      } else {
+        selectCard(state, card, playStack)
+      }
+    }
+  }
+}
+
+function move (state, card, newStack) {
+  state.selectedStack.popCard()
+
+  newStack.pushCard(card)
+
+  deselect(state)
+}
+
+function selectCard (state, card, stack) {
+  deselect(state)
+
+  card.selected = true
+  state.selectedCard = card
+  state.selectedStack = stack
 }
