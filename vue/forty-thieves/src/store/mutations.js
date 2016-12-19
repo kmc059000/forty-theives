@@ -5,16 +5,6 @@ import DiscardStack from '../model/DiscardStack'
 import DrawStack from '../model/DrawStack'
 import DropStack from '../model/DropStack'
 
-export const increment = state => {
-  state.count++
-  state.history.push('increment')
-}
-
-export const decrement = state => {
-  state.count--
-  state.history.push('decrement')
-}
-
 export const resetUndos = state => {
   state.undoCount = 0
 }
