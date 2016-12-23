@@ -58,21 +58,17 @@ export default {
 </script>
 <style scoped>
 
-
-#infoPanel
-{
+#infoPanel {
 	display: none;
 }
-#topPanel
-{
+
+#topPanel {
     width: 800px;
     height: 112px;
     margin: 10px;
 }
 
-
-#buttonPanel
-{
+#buttonPanel {
     margin-left: 10px;
 }
 
