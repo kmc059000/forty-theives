@@ -131,7 +131,7 @@ export const selectPlayStack = function (state, playStackIndex) {
 
 export const selectDropStack = function (state, dropStackIndex) {
   var dropStack = state.dropStacks[dropStackIndex]
-  var card = dropStack.topCard()
+  var card = helpers.topCard(dropStack)
 
   var previousCard = state.selectedCard
 

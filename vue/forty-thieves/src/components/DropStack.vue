@@ -7,6 +7,7 @@
 
 <script>
   import Card from './Card'
+  import * as helpers from '../store/helpers'
 
   export default {
     props: ['stack', 'index'],
@@ -19,10 +20,10 @@
     },
     computed: {
       anyCards: function () {
-        return this.stack.anyCards()
+        return helpers.anyCards(this.stack)
       },
       card: function () {
-        return this.stack.topCard()
+        return helpers.topCard(this.stack)
       }
     },
     methods: {
