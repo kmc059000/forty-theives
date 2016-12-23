@@ -20,6 +20,7 @@ export const deal = (state) => {
 
   state.logOn = false
 
+  state.playStacks = []
   for (i = 0; i < 10; i++) {
     stack = new PlayStack(i)
 
@@ -37,6 +38,7 @@ export const deal = (state) => {
     state.drawStack.pushCard(deck.pop())
   }
 
+  state.dropStacks = []
   for (i = 0; i < 8; i++) {
     stack = new DropStack(i)
     state.dropStacks.push(stack)

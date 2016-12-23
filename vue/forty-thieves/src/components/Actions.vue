@@ -34,7 +34,7 @@ export default {
   ]),
   methods: {
     newGame () {
-      console.info('start new game')
+      this.$store.commit('deal')
     },
     undo () {
       console.info('undo')
