@@ -7,7 +7,7 @@
 
 <script>
   import Card from './Card'
-  import * as helpers from '../store/helpers'
+  import * as helpers from '../../store/helpers'
 
   export default {
     props: ['stack', 'index'],

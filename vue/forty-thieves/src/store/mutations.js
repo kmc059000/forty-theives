@@ -22,16 +22,6 @@ export const deal = (state) => {
   }
 }
 
-// MOVING CARDS
-function move (state, card, newStack) {
-  storeState(state)
-
-  helpers.popCard(state.selectedStack)
-  helpers.pushCard(newStack, card)
-
-  deselect(state)
-}
-
 export const drawCard = function (state) {
   storeState(state)
 
@@ -121,15 +111,25 @@ export const deselect = function (state) {
 }
 
 // UNDO Handling
+export function undo (state) {
+  var newState = state.history.pop()
+  _.assign(state, newState)
+
+  deselect(state)
+}
+
 function storeState (state) {
   var copyableState = _.omit(state, ['history'])
   var clone = _.cloneDeep(copyableState)
   state.history.push(clone)
 }
 
-export function undo (state) {
-  var newState = state.history.pop()
-  _.assign(state, newState)
+// MOVING CARDS
+function move (state, card, newStack) {
+  storeState(state)
+
+  helpers.popCard(state.selectedStack)
+  helpers.pushCard(newStack, card)
 
   deselect(state)
 }

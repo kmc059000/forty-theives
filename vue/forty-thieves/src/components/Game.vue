@@ -8,8 +8,8 @@
 
 <script>
 import Actions from './Actions'
-import TopStacks from './TopStacks'
-import BottomStacks from './BottomStacks'
+import TopStacks from './containers/TopStacks'
+import BottomStacks from './containers/BottomStacks'
 
 export default {
   components: {
@@ -18,7 +18,7 @@ export default {
     BottomStacks
   },
   created () {
-    this.$store.commit('deal')
+    this.$store.dispatch('deal')
   }
 }
 </script>

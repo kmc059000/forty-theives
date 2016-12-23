@@ -9,9 +9,9 @@
 
 <script>
   import { mapState } from 'vuex'
-  import DropStack from './DropStack'
-  import DrawStack from './DrawStack'
-  import DiscardStack from './DiscardStack'
+  import DropStack from '../stacks/DropStack'
+  import DrawStack from '../stacks/DrawStack'
+  import DiscardStack from '../stacks/DiscardStack'
   export default {
     name: 'top-stacks',
     components: {

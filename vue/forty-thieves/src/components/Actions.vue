@@ -29,10 +29,10 @@ export default {
   ]),
   methods: {
     newGame () {
-      this.$store.commit('deal')
+      this.$store.dispatch('deal')
     },
     undo () {
-      this.$store.commit('undo')
+      this.$store.dispatch('undo')
     },
     updateStatus () {
       let seconds = 1000

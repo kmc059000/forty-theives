@@ -7,7 +7,7 @@
 
 <script>
   import { mapState } from 'vuex'
-  import PlayStack from './PlayStack'
+  import PlayStack from '../stacks/PlayStack'
   export default {
     name: 'bottom-stacks',
     components: {
