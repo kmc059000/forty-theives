@@ -28,5 +28,7 @@
   }
 </script>
 <style scoped>
-
+  .cardBack {
+      background-color: Black;
+  }
 </style>

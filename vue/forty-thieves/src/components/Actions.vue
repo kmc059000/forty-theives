@@ -3,7 +3,6 @@
     <div id="buttonPanel">
       <button @click="newGame">New Game</button>
       <button @click="undo">Undo</button>
-      <button @click="showInfo">Show Info</button>
 
       <span id="lblInfo">
         Time: {{elapsedMins}}:{{elapsedSecs}} Score: {{score}}
@@ -38,9 +37,6 @@ export default {
     },
     undo () {
       this.$store.commit('undo')
-    },
-    showInfo () {
-      console.info('show info')
     },
     updateStatus () {
       let seconds = 1000
