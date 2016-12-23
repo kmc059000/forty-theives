@@ -120,7 +120,7 @@ export const selectPlayStack = function (state, playStackIndex) {
     if (card === previousCard) {
       deselect(state)
     } else {
-      if (previousCard && card.canDropOnOpenCard(previousCard)) {
+      if (previousCard && helpers.canDropOnOpenCard(card, previousCard)) {
         move(state, previousCard, playStack)
       } else {
         selectCard(state, card, playStack)
@@ -139,7 +139,7 @@ export const selectDropStack = function (state, dropStackIndex) {
     if (card === previousCard) {
       deselect(state)
     } else {
-      if (previousCard && previousCard.canDropOnDropStackCard(card)) {
+      if (previousCard && helpers.canDropOnDropStackCard(previousCard, card)) {
         move(state, previousCard, dropStack)
       } else {
         selectCard(state, card, dropStack)

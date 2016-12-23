@@ -18,3 +18,15 @@ export const popCard = (stack) => {
     return stack._stack.pop()
   }
 }
+
+export const canDropOnOpenCard = (sourceCard, card) => {
+  return sourceCard.cardNumber - card.cardNumber === 1 && sourceCard.cardSuit === card.cardSuit
+}
+
+export const canDropOnDropStackCard = (sourceCard, card) => {
+  if (!card) {
+    return sourceCard.cardNumber === 1
+  }
+
+  return sourceCard.cardNumber - card.cardNumber === 1 && sourceCard.cardSuit === card.cardSuit
+}
