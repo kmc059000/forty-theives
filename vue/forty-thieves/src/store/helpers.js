@@ -30,7 +30,3 @@ export const canDropOnDropStackCard = (sourceCard, card) => {
 
   return sourceCard.cardNumber - card.cardNumber === 1 && sourceCard.cardSuit === card.cardSuit
 }
-
-export const createStack = () => {
-  return []
-}

@@ -18,7 +18,7 @@ export const deal = (state) => {
 
   state.playStacks = []
   for (i = 0; i < 10; i++) {
-    stack = helpers.createStack()
+    stack = []
 
     state.playStacks.push(stack)
 
@@ -27,8 +27,8 @@ export const deal = (state) => {
     }
   }
 
-  state.discardStack = helpers.createStack()
-  state.drawStack = helpers.createStack()
+  state.discardStack = []
+  state.drawStack = []
 
   while (deck.length > 0) {
     helpers.pushCard(state.drawStack, deck.pop())
@@ -36,7 +36,7 @@ export const deal = (state) => {
 
   state.dropStacks = []
   for (i = 0; i < 8; i++) {
-    state.dropStacks.push(helpers.createStack())
+    state.dropStacks.push([])
   }
 
   state.logOn = true
