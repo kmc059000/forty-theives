@@ -16,8 +16,6 @@ const state = {
   dropStacks: [],
   selectedCard: null,
   selectedStack: null,
-  logOn: false,
-  logs: [],
   undoCount: 0,
   timer: null,
   startTime: null,

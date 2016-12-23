@@ -10,65 +10,24 @@ export const incrementScore = state => {
 }
 
 export const deal = (state) => {
-  var deck, i, j, stack
-
-  deck = generateDeck()
-
-  state.logOn = false
-
-  state.playStacks = []
-  for (i = 0; i < 10; i++) {
-    stack = []
-
-    state.playStacks.push(stack)
-
-    for (j = 0; j < 4; j++) {
-      helpers.pushCard(stack, deck.pop())
-    }
-  }
-
+  state.playStacks = _.map(_.range(10), i => [])
+  state.dropStacks = _.map(_.range(8), i => [])
   state.discardStack = []
   state.drawStack = []
-
-  while (deck.length > 0) {
-    helpers.pushCard(state.drawStack, deck.pop())
-  }
-
-  state.dropStacks = []
-  for (i = 0; i < 8; i++) {
-    state.dropStacks.push([])
-  }
-
-  state.logOn = true
   state.score = 0
   state.startTime = new Date()
-}
 
-const consts = {
-  cardNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
-  cardSuits: ['C', 'D', 'S', 'H'],
-  decks: 2
-}
+  var deck = helpers.generateDeck()
 
-function generateDeck () {
-  var deck = []
+  // each play stack gets 4 cards
+  var count = state.playStacks.length * 4
+  while (count--) {
+    state.playStacks[count % 10].push(deck.pop())
+  }
 
-  _.forEach(_.range(consts.decks), () => {
-    _.forEach(consts.cardNumbers, (cardNumber) => {
-      _.forEach(consts.cardSuits, (cardSuit) => {
-        deck.push({
-          cardNumber,
-          cardSuit,
-          selected: false
-        })
-      })
-    })
-  })
-
-  // one shuffle didnt seem all that random. Similar cards seemed to be right next to each other
-  deck = _(deck).shuffle().shuffle().shuffle().value()
-
-  return deck
+  while (deck.length > 0) {
+    state.drawStack.push(deck.pop())
+  }
 }
 
 export const deselect = function (state) {
