@@ -1,9 +1,4 @@
 import _ from 'lodash'
-import Card from '../model/Card'
-import PlayStack from '../model/PlayStack'
-import DiscardStack from '../model/DiscardStack'
-import DrawStack from '../model/DrawStack'
-import DropStack from '../model/DropStack'
 import * as helpers from './helpers'
 
 export const resetUndos = state => {
@@ -23,7 +18,7 @@ export const deal = (state) => {
 
   state.playStacks = []
   for (i = 0; i < 10; i++) {
-    stack = new PlayStack(i)
+    stack = helpers.createStack()
 
     state.playStacks.push(stack)
 
@@ -32,8 +27,8 @@ export const deal = (state) => {
     }
   }
 
-  state.discardStack = new DiscardStack()
-  state.drawStack = new DrawStack(state.discardStack)
+  state.discardStack = helpers.createStack()
+  state.drawStack = helpers.createStack()
 
   while (deck.length > 0) {
     helpers.pushCard(state.drawStack, deck.pop())
@@ -41,8 +36,7 @@ export const deal = (state) => {
 
   state.dropStacks = []
   for (i = 0; i < 8; i++) {
-    stack = new DropStack(i)
-    state.dropStacks.push(stack)
+    state.dropStacks.push(helpers.createStack())
   }
 
   state.logOn = true
@@ -62,7 +56,11 @@ function generateDeck () {
   _.forEach(_.range(consts.decks), () => {
     _.forEach(consts.cardNumbers, (cardNumber) => {
       _.forEach(consts.cardSuits, (cardSuit) => {
-        deck.push(new Card(cardNumber, cardSuit))
+        deck.push({
+          cardNumber,
+          cardSuit,
+          selected: false
+        })
       })
     })
   })
