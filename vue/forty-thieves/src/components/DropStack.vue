@@ -23,7 +23,7 @@
         return helpers.anyCards(this.stack)
       },
       card: function () {
-
+        return helpers.topCard(this.stack)
       }
     },
     methods: {
