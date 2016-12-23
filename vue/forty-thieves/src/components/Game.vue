@@ -7,21 +7,15 @@
 </template>
 
 <script>
-import Messages from './Messages'
 import Actions from './Actions'
 import TopStacks from './TopStacks'
 import BottomStacks from './BottomStacks'
 
 export default {
   components: {
-    Messages,
     Actions,
     TopStacks,
     BottomStacks
-  },
-  data () {
-    return {
-    }
   },
   created () {
     this.$store.commit('deal')

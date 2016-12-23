@@ -13,10 +13,6 @@
   import Card from './Card'
 
   export default {
-    data () {
-      return {
-      }
-    },
     components: {
       Card
     },
@@ -38,6 +34,3 @@
     }
   }
 </script>
-<style scoped>
-
-</style>

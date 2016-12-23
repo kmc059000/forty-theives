@@ -1,6 +1,7 @@
 <template>
   <div>
     <div id="buttonPanel">
+
       <button @click="newGame">New Game</button>
       <button @click="undo">Undo</button>
 
@@ -9,11 +10,6 @@
       </span>
     </div>
 
-    <div id="infoPanel">
-      <button id="btnViewLog">Refresh Log</button>
-      <ul id='log'>
-      </ul>
-    </div>
   </div>
 </template>
 

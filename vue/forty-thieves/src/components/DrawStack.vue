@@ -8,10 +8,6 @@
 <script>
   import { mapState } from 'vuex'
   export default {
-    data () {
-      return {
-      }
-    },
     computed: {
       anyCards: function () {
         return this.$store.getters.drawStackAnyCards

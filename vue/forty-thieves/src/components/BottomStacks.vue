@@ -13,15 +13,8 @@
     components: {
       PlayStack
     },
-    data () {
-      return {
-      }
-    },
     computed: {
       ...mapState(['playStacks'])
     }
   }
 </script>
-<style scoped>
-
-</style>

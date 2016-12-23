@@ -1,14 +1,6 @@
 import _ from 'lodash'
 import * as helpers from './helpers'
 
-export const resetUndos = state => {
-  state.undoCount = 0
-}
-
-export const incrementScore = state => {
-  state.score++
-}
-
 export const deal = (state) => {
   state.playStacks = _.map(_.range(10), i => [])
   state.dropStacks = _.map(_.range(8), i => [])
@@ -30,13 +22,14 @@ export const deal = (state) => {
   }
 }
 
-export const deselect = function (state) {
-  if (state.selectedCard) {
-    state.selectedCard.selected = false
-  }
+// MOVING CARDS
+function move (state, card, newStack) {
+  storeState(state)
 
-  state.selectedCard = null
-  state.selectedStack = null
+  helpers.popCard(state.selectedStack)
+  helpers.pushCard(newStack, card)
+
+  deselect(state)
 }
 
 export const drawCard = function (state) {
@@ -51,6 +44,7 @@ export const drawCard = function (state) {
   }
 }
 
+// SELECTING CARDS
 export const selectDiscardStack = function (state) {
   var card = helpers.topCard(state.discardStack)
 
@@ -107,15 +101,6 @@ export const selectDropStack = function (state, dropStackIndex) {
   }
 }
 
-function move (state, card, newStack) {
-  storeState(state)
-
-  helpers.popCard(state.selectedStack)
-  helpers.pushCard(newStack, card)
-
-  deselect(state)
-}
-
 function selectCard (state, card, stack) {
   deselect(state)
 
@@ -126,6 +111,16 @@ function selectCard (state, card, stack) {
   }
 }
 
+export const deselect = function (state) {
+  if (state.selectedCard) {
+    state.selectedCard.selected = false
+  }
+
+  state.selectedCard = null
+  state.selectedStack = null
+}
+
+// UNDO Handling
 function storeState (state) {
   var copyableState = _.omit(state, ['history'])
   var clone = _.cloneDeep(copyableState)

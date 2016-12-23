@@ -19,10 +19,6 @@
       DiscardStack,
       DropStack
     },
-    data () {
-      return {
-      }
-    },
     computed: mapState([
       'drawStack',
       'discardStack',
@@ -30,6 +26,3 @@
     ])
   }
 </script>
-<style scoped>
-
-</style>

@@ -13,10 +13,6 @@
 
   export default {
     props: ['stack', 'index'],
-    data () {
-      return {
-      }
-    },
     components: {
       Card
     },

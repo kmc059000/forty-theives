@@ -11,10 +11,6 @@
 
   export default {
     props: ['stack', 'index'],
-    data () {
-      return {
-      }
-    },
     components: {
       Card
     },
@@ -33,6 +29,3 @@
     }
   }
 </script>
-<style scoped>
-
-</style>
