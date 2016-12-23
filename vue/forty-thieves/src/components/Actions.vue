@@ -46,7 +46,7 @@ export default {
       let seconds = 1000
       let minutes = seconds * 60
 
-      if (!this.startTime) {
+      if (!this.startTime || !this.startTime.getTime) {
         return
       }
 

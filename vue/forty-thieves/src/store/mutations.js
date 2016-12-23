@@ -44,6 +44,7 @@ export const deal = (state) => {
 
   state.logOn = true
   state.score = 0
+  state.startTime = new Date()
 }
 
 const consts = {

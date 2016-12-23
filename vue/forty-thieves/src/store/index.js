@@ -20,7 +20,7 @@ const state = {
   logs: [],
   undoCount: 0,
   timer: null,
-  startTime: new Date(),
+  startTime: null,
   score: 0
 }
 
