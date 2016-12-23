@@ -52,7 +52,7 @@ export default {
     }
   },
   created () {
-    setInterval(this.updateStatus.bind(this), 100)
+    setInterval(this.updateStatus.bind(this), 1000)
   }
 }
 </script>
