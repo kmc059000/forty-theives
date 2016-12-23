@@ -28,7 +28,7 @@ export const deal = (state) => {
     state.playStacks.push(stack)
 
     for (j = 0; j < 4; j++) {
-      stack.pushCard(deck.pop())
+      helpers.pushCard(stack, deck.pop())
     }
   }
 
