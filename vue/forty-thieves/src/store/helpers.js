@@ -1,21 +1,21 @@
 
 export const topCard = stack => {
-  if (stack._stack.length) {
-    return stack._stack[stack._stack.length - 1]
+  if (stack.length) {
+    return stack[stack.length - 1]
   }
 }
 
 export const anyCards = stack => {
-  return !!stack._stack.length
+  return !!stack.length
 }
 
 export const pushCard = (stack, card) => {
-  stack._stack.push(card)
+  stack.push(card)
 }
 
 export const popCard = (stack) => {
-  if (stack._stack.length) {
-    return stack._stack.pop()
+  if (stack.length) {
+    return stack.pop()
   }
 }
 
@@ -32,7 +32,5 @@ export const canDropOnDropStackCard = (sourceCard, card) => {
 }
 
 export const createStack = () => {
-  return {
-    _stack: []
-  }
+  return []
 }

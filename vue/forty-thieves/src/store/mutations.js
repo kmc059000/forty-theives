@@ -147,18 +147,8 @@ export const selectDropStack = function (state, dropStackIndex) {
 }
 
 function move (state, card, newStack) {
-  // todo need to remove the true case
-  if (state.selectedStack.popCard) {
-    state.selectedStack.popCard()
-  } else {
-    helpers.popCard(state.selectedStack)
-  }
-
-  if (newStack.pushCard) {
-    newStack.pushCard(card)
-  } else {
-    helpers.pushCard(newStack, card)
-  }
+  helpers.popCard(state.selectedStack)
+  helpers.pushCard(newStack, card)
 
   deselect(state)
 }

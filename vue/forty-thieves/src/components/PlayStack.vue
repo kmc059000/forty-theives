@@ -25,7 +25,7 @@
         return helpers.anyCards(this.stack)
       },
       cards: function () {
-        return this.stack._stack
+        return this.stack
       }
     },
     methods: {
