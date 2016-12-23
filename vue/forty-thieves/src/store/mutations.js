@@ -168,7 +168,9 @@ function move (state, card, newStack) {
 function selectCard (state, card, stack) {
   deselect(state)
 
-  card.selected = true
-  state.selectedCard = card
-  state.selectedStack = stack
+  if (card) {
+    card.selected = true
+    state.selectedCard = card
+    state.selectedStack = stack
+  }
 }
