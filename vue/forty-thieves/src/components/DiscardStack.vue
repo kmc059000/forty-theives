@@ -22,10 +22,10 @@
     },
     computed: {
       anyCards: function () {
-        return this.discardStack.anyCards()
+        return this.$store.getters.discardStackAnyCards
       },
       card: function () {
-        return this.discardStack.topCard()
+        return this.$store.getters.discardStackTopCard
       },
       ...mapState([
         'discardStack'

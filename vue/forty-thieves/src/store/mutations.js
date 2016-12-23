@@ -4,6 +4,7 @@ import PlayStack from '../model/PlayStack'
 import DiscardStack from '../model/DiscardStack'
 import DrawStack from '../model/DrawStack'
 import DropStack from '../model/DropStack'
+import * as helpers from './helpers'
 
 export const resetUndos = state => {
   state.undoCount = 0
@@ -86,13 +87,13 @@ export const drawCard = function (state) {
   var card = state.drawStack.draw()
 
   if (card) {
-    state.discardStack.push(card)
+    helpers.pushCard(state.discardStack, card)
     state.score++
   }
 }
 
 export const selectDiscardStack = function (state) {
-  var card = state.discardStack.topCard()
+  var card = helpers.topCard(state.discardStack)
 
   if (card) {
     if (card === state.selectedCard) {
@@ -148,7 +149,12 @@ export const selectDropStack = function (state, dropStackIndex) {
 }
 
 function move (state, card, newStack) {
-  state.selectedStack.popCard()
+  // todo need to remove the true case
+  if (state.selectedStack.popCard) {
+    state.selectedStack.popCard()
+  } else {
+    helpers.popCard(state.selectedStack)
+  }
 
   newStack.pushCard(card)
 

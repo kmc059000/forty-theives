@@ -1,3 +1,5 @@
+import * as helpers from './helpers'
+
 export const count = state => state.count
 
 const limit = 5
@@ -13,4 +15,13 @@ export const recentHistory = state => {
 
 export const anyCardsInDrawStack = state => {
   return state.drawStack.anyCards()
+}
+
+// Discard Stack
+export const discardStackTopCard = state => {
+  return helpers.topCard(state.discardStack)
+}
+
+export const discardStackAnyCards = state => {
+  return helpers.anyCards(state.discardStack)
 }
