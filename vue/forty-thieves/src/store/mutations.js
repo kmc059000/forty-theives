@@ -40,6 +40,8 @@ export const deselect = function (state) {
 }
 
 export const drawCard = function (state) {
+  storeState(state)
+
   deselect(state)
   var card = helpers.popCard(state.drawStack)
 
@@ -106,6 +108,8 @@ export const selectDropStack = function (state, dropStackIndex) {
 }
 
 function move (state, card, newStack) {
+  storeState(state)
+
   helpers.popCard(state.selectedStack)
   helpers.pushCard(newStack, card)
 
@@ -120,4 +124,17 @@ function selectCard (state, card, stack) {
     state.selectedCard = card
     state.selectedStack = stack
   }
+}
+
+function storeState (state) {
+  var copyableState = _.omit(state, ['history'])
+  var clone = _.cloneDeep(copyableState)
+  state.history.push(clone)
+}
+
+export function undo (state) {
+  var newState = state.history.pop()
+  _.assign(state, newState)
+
+  deselect(state)
 }

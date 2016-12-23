@@ -37,7 +37,7 @@ export default {
       this.$store.commit('deal')
     },
     undo () {
-      console.info('undo')
+      this.$store.commit('undo')
     },
     showInfo () {
       console.info('show info')
