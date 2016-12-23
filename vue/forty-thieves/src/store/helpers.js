@@ -13,6 +13,8 @@ export const pushCard = (stack, card) => {
   stack._stack.push(card)
 }
 
-export const popCard = (stack, card) => {
-  return stack._stack.pop()
+export const popCard = (stack) => {
+  if (stack._stack.length) {
+    return stack._stack.pop()
+  }
 }

@@ -14,8 +14,7 @@
     },
     computed: {
       anyCards: function () {
-        // return false
-        return this.drawStack.anyCards()
+        return this.$store.getters.drawStackAnyCards
       },
       ...mapState([
         'drawStack'

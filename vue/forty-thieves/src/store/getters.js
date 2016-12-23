@@ -25,3 +25,12 @@ export const discardStackTopCard = state => {
 export const discardStackAnyCards = state => {
   return helpers.anyCards(state.discardStack)
 }
+
+// Draw Stack
+export const drawStackTopCard = state => {
+  return helpers.topCard(state.drawStack)
+}
+
+export const drawStackAnyCards = state => {
+  return helpers.anyCards(state.drawStack)
+}

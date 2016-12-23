@@ -36,7 +36,7 @@ export const deal = (state) => {
   state.drawStack = new DrawStack(state.discardStack)
 
   while (deck.length > 0) {
-    state.drawStack.pushCard(deck.pop())
+    helpers.pushCard(state.drawStack, deck.pop())
   }
 
   state.dropStacks = []
@@ -84,7 +84,7 @@ export const deselect = function (state) {
 
 export const drawCard = function (state) {
   deselect(state)
-  var card = state.drawStack.draw()
+  var card = helpers.popCard(state.drawStack)
 
   if (card) {
     helpers.pushCard(state.discardStack, card)
@@ -112,7 +112,7 @@ export const selectDiscardStack = function (state) {
 
 export const selectPlayStack = function (state, playStackIndex) {
   var playStack = state.playStacks[playStackIndex]
-  var card = playStack.topCard()
+  var card = helpers.topCard(playStack)
 
   var previousCard = state.selectedCard
 
@@ -156,7 +156,11 @@ function move (state, card, newStack) {
     helpers.popCard(state.selectedStack)
   }
 
-  newStack.pushCard(card)
+  if (newStack.pushCard) {
+    newStack.pushCard(card)
+  } else {
+    helpers.pushCard(newStack, card)
+  }
 
   deselect(state)
 }
