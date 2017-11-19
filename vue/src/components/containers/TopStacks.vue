@@ -3,7 +3,7 @@
     <drop-stack v-for="(dropStack, index) in dropStacks" :stack="dropStack" :index="index">
     </drop-stack>
     <draw-stack></draw-stack>
-    <discard-stack></draw-stack>
+    <discard-stack></discard-stack>
   </div>
 </template>
 
