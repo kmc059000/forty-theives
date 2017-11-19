@@ -1,6 +1,6 @@
 <template>
   <div id="bottomPanel">
-    <play-stack v-for="(playStack, index) in playStacks" :stack="playStack" :index="index">
+    <play-stack v-for="(playStack, index) in playStacks" :stack="playStack" :index="index" :key="index">
     </play-stack>
   </div>
 </template>
