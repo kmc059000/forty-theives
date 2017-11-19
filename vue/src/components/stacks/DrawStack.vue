@@ -1,12 +1,12 @@
 <template>
   <div>
     <div :class="{'drawStack': true, 'cardBack': this.anyCards, 'selectedCard' : this.drawStack.selected }"
-        @click="select"></div>
+        @click="drawCard"></div>
   </div>
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
   export default {
     computed: {
       anyCards: function () {
@@ -17,9 +17,7 @@
       ])
     },
     methods: {
-      select () {
-        this.$store.dispatch('drawCard')
-      }
+      ...mapActions(['drawCard'])
     }
   }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="cardStack">
     <div @click="select">
-        <card v-for="(card, index) in cards" :card="card" :index="index">
+        <card v-for="(card, index) in cards" :card="card" :index="index" :key="`card-${card.cardSuit}-${card.cardNumber}`">
         </card>
     </div>
   </div>
@@ -17,10 +17,10 @@
       Card
     },
     computed: {
-      anyCards: function () {
+      anyCards () {
         return helpers.anyCards(this.stack)
       },
-      cards: function () {
+      cards () {
         return this.stack
       }
     },
@@ -31,6 +31,3 @@
     }
   }
 </script>
-<style scoped>
-
-</style>

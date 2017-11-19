@@ -9,12 +9,8 @@
   export default {
     name: 'card',
     props: ['card', 'index'],
-    data () {
-      return {
-      }
-    },
     computed: {
-      suitClasses: function () {
+      suitClasses () {
         var obj = {
           card: true,
           'selectedCard': this.card.selected
@@ -26,7 +22,7 @@
 
         return obj
       },
-      numberClasses: function () {
+      numberClasses () {
         var obj = {
           cardsize: true
         }
@@ -37,7 +33,7 @@
 
         return obj
       },
-      offset: function () {
+      offset () {
         return (this.index * 25) + 'px'
       }
     }
