@@ -2,7 +2,7 @@
   <div id="topPanel">
     <drop-stack v-for="(dropStack, index) in dropStacks" :stack="dropStack" :index="index" :key="index">
     </drop-stack>
-    <draw-stack></draw-stack>
+    <draw-stack :stack="drawStack"></draw-stack>
     <discard-stack></discard-stack>
   </div>
 </template>

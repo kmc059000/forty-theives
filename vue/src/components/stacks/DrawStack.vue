@@ -1,20 +1,18 @@
 <template>
   <div>
-    <div :class="{'drawStack': true, 'cardBack': this.anyCards, 'selectedCard' : this.drawStack.selected }"
+    <div :class="{'drawStack': true, 'cardBack': this.anyCards, 'selectedCard' : this.stack.selected }"
         @click="drawCard"></div>
   </div>
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex'
+  import { mapActions } from 'vuex'
   export default {
+    props: ['stack'],
     computed: {
       anyCards: function () {
-        return this.$store.getters.drawStackAnyCards
-      },
-      ...mapState([
-        'drawStack'
-      ])
+        return !!this.stack.length
+      }
     },
     methods: {
       ...mapActions(['drawCard'])
