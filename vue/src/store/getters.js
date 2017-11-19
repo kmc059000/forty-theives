@@ -1,7 +1,7 @@
 import * as helpers from './helpers'
 
 export const anyCardsInDrawStack = state => {
-  return state.drawStack.anyCards()
+  return helpers.anyCards(state.drawStack)
 }
 
 // Discard Stack
