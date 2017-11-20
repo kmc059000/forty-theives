@@ -1,13 +1,22 @@
 <template>
   <div :class="suitClasses" :style="{'top': offset}">
       <div :class="numberClasses">
+        <card-number :card="card" class="tl"></card-number>
+        <card-number :card="card" class="tr"></card-number>
+        <card-number :card="card" class="bl"></card-number>
+        <card-number :card="card" class="br"></card-number>
       </div>
     </div>
 </template>
 
 <script>
+  import CardNumber from './CardNumber';
+
   export default {
     name: 'card',
+    components: {
+      CardNumber,
+    },
     props: ['card', 'index'],
     computed: {
       suit() {
@@ -62,10 +71,6 @@
       background-repeat: no-repeat;
   }
 
-  ._1, ._2, ._3, ._4, ._5, ._6, ._7, ._8, ._9, ._10, ._11, ._12, ._13 {
-      background-image: url(/static/sprite.png)
-  }
-
   .H {
       background-position: -144px 0px;
   }
@@ -82,56 +87,27 @@
       background-position: -216px 0px;
   }
 
-  ._1 {
-      background-position: -288px 0px;
+  .tl {
+    position: absolute;
+    top: 2px;
+    left: 2px;
   }
 
-  ._2 {
-      background-position: -360px 0px;
+  .tr {
+    position: absolute;
+    top: 2px;
+    right: 2px;
   }
 
-  ._3 {
-      background-position: -432px 0px;
+  .bl {
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
   }
 
-  ._4 {
-      background-position: -504px 0px;
+  .br {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
   }
-
-  ._5 {
-      background-position: -576px 0px;
-  }
-
-  ._6 {
-      background-position: -648px 0px;
-  }
-
-  ._7 {
-      background-position: -720px 0px;
-  }
-
-  ._8 {
-      background-position: -792px 0px;
-  }
-
-  ._9 {
-      background-position: -864px 0px;
-  }
-
-  ._10 {
-      background-position: -940px 0px;
-  }
-
-  ._11 {
-      background-position: -1012px 0px;
-  }
-
-  ._12 {
-      background-position: -1084px 0px;
-  }
-
-  ._13 {
-      background-position: -1156px 0px;
-  }
-
 </style>
