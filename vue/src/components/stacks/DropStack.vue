@@ -1,13 +1,14 @@
 <template>
   <div class="dropStack" @click="select">
-    <card v-if="anyCards" :card="card">
+    <card v-if="card" :card="card">
     </card>
   </div>
 </template>
 
 <script>
+  import { mapActions } from 'vuex';
   import Card from './Card';
-  import * as helpers from '../../store/helpers';
+  import { topCard } from '../../store/helpers';
 
   export default {
     props: ['stack', 'index'],
@@ -15,16 +16,14 @@
       Card,
     },
     computed: {
-      anyCards() {
-        return helpers.anyCards(this.stack);
-      },
       card() {
-        return helpers.topCard(this.stack);
+        return topCard(this.stack);
       },
     },
     methods: {
+      ...mapActions(['selectDropStack']),
       select() {
-        this.$store.dispatch('selectDropStack', this.index);
+        this.selectDropStack(this.index);
       },
     },
   };

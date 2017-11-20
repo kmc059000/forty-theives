@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   data() {
@@ -30,12 +30,10 @@ export default {
     ]),
   },
   methods: {
-    newGame() {
-      this.$store.dispatch('deal');
-    },
-    undo() {
-      this.$store.dispatch('undo');
-    },
+    ...mapActions({
+      newGame: 'deal',
+      undo: 'undo',
+    }),
     updateStatus() {
       const seconds = 1000;
       const minutes = seconds * 60;
@@ -54,7 +52,7 @@ export default {
     },
   },
   created() {
-    setInterval(this.updateStatus.bind(this), 1000);
+    setInterval(this.updateStatus, 1000);
   },
 };
 </script>

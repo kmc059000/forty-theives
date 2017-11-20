@@ -9,6 +9,7 @@
 </template>
 
 <script>
+  import { mapActions, mapGetters } from 'vuex';
   import Card from './Card';
 
   export default {
@@ -20,14 +21,14 @@
       anyCards() {
         return !!this.stack.length;
       },
-      card() {
-        return this.$store.getters.discardStackTopCard;
-      },
+      ...mapGetters({
+        card: 'discardStackTopCard',
+      }),
     },
     methods: {
-      select() {
-        this.$store.dispatch('selectDiscardStack');
-      },
+      ...mapActions({
+        select: 'selectDiscardStack',
+      }),
     },
   };
 </script>

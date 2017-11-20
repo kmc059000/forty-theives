@@ -10,28 +10,24 @@
     name: 'card',
     props: ['card', 'index'],
     computed: {
+      suit() {
+        return this.card && this.card.cardSuit;
+      },
+      number() {
+        return this.card && this.card.cardNumber;
+      },
       suitClasses() {
-        const obj = {
+        return {
           card: true,
           selectedCard: this.card.selected,
+          [this.suit]: true,
         };
-
-        if (this.card) {
-          obj[this.card.cardSuit] = true;
-        }
-
-        return obj;
       },
       numberClasses() {
-        const obj = {
+        return {
           cardsize: true,
+          [`_${this.number}`]: true,
         };
-
-        if (this.card) {
-          obj[`_${this.card.cardNumber}`] = true;
-        }
-
-        return obj;
       },
       offset() {
         return `${(this.index * 25)}px`;

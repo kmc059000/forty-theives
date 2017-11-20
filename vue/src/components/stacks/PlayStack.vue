@@ -8,8 +8,8 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex';
   import Card from './Card';
-  import * as helpers from '../../store/helpers';
 
   export default {
     props: ['stack', 'index'],
@@ -17,16 +17,14 @@
       Card,
     },
     computed: {
-      anyCards() {
-        return helpers.anyCards(this.stack);
-      },
       cards() {
         return this.stack;
       },
     },
     methods: {
+      ...mapActions(['selectPlayStack']),
       select() {
-        this.$store.dispatch('selectPlayStack', this.index);
+        this.selectPlayStack(this.index);
       },
     },
   };
