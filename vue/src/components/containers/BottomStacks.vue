@@ -6,15 +6,16 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
-  import PlayStack from '../stacks/PlayStack'
+  import { mapState } from 'vuex';
+  import PlayStack from '../stacks/PlayStack';
+
   export default {
     name: 'bottom-stacks',
     components: {
-      PlayStack
+      PlayStack,
     },
     computed: {
-      ...mapState(['playStacks'])
-    }
-  }
+      ...mapState(['playStacks']),
+    },
+  };
 </script>

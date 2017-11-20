@@ -14,47 +14,49 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'vuex';
 
 export default {
-  data () {
+  data() {
     return {
       elapsedMins: 0,
-      elapsedSecs: 0
-    }
+      elapsedSecs: 0,
+    };
   },
-  computed: mapState([
-    'score',
-    'startTime'
-  ]),
+  computed: {
+    ...mapState([
+      'score',
+      'startTime',
+    ]),
+  },
   methods: {
-    newGame () {
-      this.$store.dispatch('deal')
+    newGame() {
+      this.$store.dispatch('deal');
     },
-    undo () {
-      this.$store.dispatch('undo')
+    undo() {
+      this.$store.dispatch('undo');
     },
-    updateStatus () {
-      let seconds = 1000
-      let minutes = seconds * 60
+    updateStatus() {
+      const seconds = 1000;
+      const minutes = seconds * 60;
 
       if (!this.startTime || !this.startTime.getTime) {
-        return
+        return;
       }
 
-      let elapsed = new Date().getTime() - this.startTime.getTime()
-      this.elapsedMins = Math.floor(elapsed / minutes)
-      this.elapsedSecs = Math.floor((elapsed / seconds) % 60)
+      const elapsed = new Date().getTime() - this.startTime.getTime();
+      this.elapsedMins = Math.floor(elapsed / minutes);
+      this.elapsedSecs = Math.floor((elapsed / seconds) % 60);
 
       if (this.elapsedSecs < 10) {
-        this.elapsedSecs = '0' + this.elapsedSecs
+        this.elapsedSecs = `0${this.elapsedSecs}`;
       }
-    }
+    },
   },
-  created () {
-    setInterval(this.updateStatus.bind(this), 1000)
-  }
-}
+  created() {
+    setInterval(this.updateStatus.bind(this), 1000);
+  },
+};
 </script>
 <style scoped>
 

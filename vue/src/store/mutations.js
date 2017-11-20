@@ -1,135 +1,132 @@
-import _ from 'lodash'
-import * as helpers from './helpers'
+import _ from 'lodash';
+import * as helpers from './helpers';
 
-export const deal = (state) => {
-  state.playStacks = _.map(_.range(10), i => [])
-  state.dropStacks = _.map(_.range(8), i => [])
-  state.discardStack = []
-  state.drawStack = []
-  state.score = 0
-  state.startTime = new Date()
+export function deal(state) {
+  state.playStacks = _.map(_.range(10), () => []);
+  state.dropStacks = _.map(_.range(8), () => []);
+  state.discardStack = [];
+  state.drawStack = [];
+  state.score = 0;
+  state.startTime = new Date();
 
-  var deck = helpers.generateDeck()
+  const deck = helpers.generateDeck();
 
   // each play stack gets 4 cards
-  var count = state.playStacks.length * 4
-  while (count--) {
-    state.playStacks[count % 10].push(deck.pop())
+  let count = state.playStacks.length * 4;
+  while (count) {
+    state.playStacks[count % 10].push(deck.pop());
+    count -= 1;
   }
 
   while (deck.length > 0) {
-    state.drawStack.push(deck.pop())
+    state.drawStack.push(deck.pop());
   }
 }
 
-export const drawCard = function (state) {
-  storeState(state)
+export function drawCard(state) {
+  storeState(state);
 
-  deselect(state)
-  var card = helpers.popCard(state.drawStack)
+  deselect(state);
+  const card = helpers.popCard(state.drawStack);
 
   if (card) {
-    helpers.pushCard(state.discardStack, card)
-    state.score++
+    helpers.pushCard(state.discardStack, card);
+    state.score += 1;
   }
 }
 
 // SELECTING CARDS
-export const selectDiscardStack = function (state) {
-  var card = helpers.topCard(state.discardStack)
+export function selectDiscardStack(state) {
+  const card = helpers.topCard(state.discardStack);
 
   if (card) {
     if (card === state.selectedCard) {
-      deselect(state)
+      deselect(state);
     } else {
       if (state.selectedCard) {
-        deselect(state)
+        deselect(state);
       }
 
-      card.selected = true
-      state.selectedCard = card
-      state.selectedStack = state.discardStack
+      card.selected = true;
+      state.selectedCard = card;
+      state.selectedStack = state.discardStack;
     }
   }
 }
 
-export const selectPlayStack = function (state, playStackIndex) {
-  var playStack = state.playStacks[playStackIndex]
-  var card = helpers.topCard(playStack)
+export function selectPlayStack(state, playStackIndex) {
+  const playStack = state.playStacks[playStackIndex];
+  const card = helpers.topCard(playStack);
 
-  var previousCard = state.selectedCard
+  const previousCard = state.selectedCard;
 
   if (card) {
     if (card === previousCard) {
-      deselect(state)
+      deselect(state);
+    } else if (previousCard && helpers.canDropOnOpenCard(card, previousCard)) {
+      move(state, previousCard, playStack);
     } else {
-      if (previousCard && helpers.canDropOnOpenCard(card, previousCard)) {
-        move(state, previousCard, playStack)
-      } else {
-        selectCard(state, card, playStack)
-      }
+      selectCard(state, card, playStack);
     }
   }
 }
 
-export const selectDropStack = function (state, dropStackIndex) {
-  var dropStack = state.dropStacks[dropStackIndex]
-  var card = helpers.topCard(dropStack)
+export function selectDropStack(state, dropStackIndex) {
+  const dropStack = state.dropStacks[dropStackIndex];
+  const card = helpers.topCard(dropStack);
 
-  var previousCard = state.selectedCard
+  const previousCard = state.selectedCard;
 
   if (previousCard) {
     if (card === previousCard) {
-      deselect(state)
+      deselect(state);
+    } else if (previousCard && helpers.canDropOnDropStackCard(previousCard, card)) {
+      move(state, previousCard, dropStack);
     } else {
-      if (previousCard && helpers.canDropOnDropStackCard(previousCard, card)) {
-        move(state, previousCard, dropStack)
-      } else {
-        selectCard(state, card, dropStack)
-      }
+      selectCard(state, card, dropStack);
     }
   }
 }
 
-function selectCard (state, card, stack) {
-  deselect(state)
+function selectCard(state, card, stack) {
+  deselect(state);
 
   if (card) {
-    card.selected = true
-    state.selectedCard = card
-    state.selectedStack = stack
+    card.selected = true;
+    state.selectedCard = card;
+    state.selectedStack = stack;
   }
 }
 
-export const deselect = function (state) {
+export function deselect(state) {
   if (state.selectedCard) {
-    state.selectedCard.selected = false
+    state.selectedCard.selected = false;
   }
 
-  state.selectedCard = null
-  state.selectedStack = null
+  state.selectedCard = null;
+  state.selectedStack = null;
 }
 
 // UNDO Handling
-export function undo (state) {
-  var newState = state.history.pop()
-  _.assign(state, newState)
+export function undo(state) {
+  const newState = state.history.pop();
+  _.assign(state, newState);
 
-  deselect(state)
+  deselect(state);
 }
 
-function storeState (state) {
-  var copyableState = _.omit(state, ['history'])
-  var clone = _.cloneDeep(copyableState)
-  state.history.push(clone)
+function storeState(state) {
+  const copyableState = _.omit(state, ['history']);
+  const clone = _.cloneDeep(copyableState);
+  state.history.push(clone);
 }
 
 // MOVING CARDS
-function move (state, card, newStack) {
-  storeState(state)
+function move(state, card, newStack) {
+  storeState(state);
 
-  helpers.popCard(state.selectedStack)
-  helpers.pushCard(newStack, card)
+  helpers.popCard(state.selectedStack);
+  helpers.pushCard(newStack, card);
 
-  deselect(state)
+  deselect(state);
 }

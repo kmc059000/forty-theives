@@ -1,23 +1,23 @@
-import * as helpers from './helpers'
+import { anyCards, topCard } from './helpers';
 
-export const anyCardsInDrawStack = state => {
-  return helpers.anyCards(state.drawStack)
+export function anyCardsInDrawStack(state) {
+  return anyCards(state.drawStack);
 }
 
 // Discard Stack
-export const discardStackTopCard = state => {
-  return helpers.topCard(state.discardStack)
+export function discardStackTopCard(state) {
+  return topCard(state.discardStack);
 }
 
-export const discardStackAnyCards = state => {
-  return helpers.anyCards(state.discardStack)
+export function discardStackAnyCards(state) {
+  return anyCards(state.discardStack);
 }
 
 // Draw Stack
-export const drawStackTopCard = state => {
-  return helpers.topCard(state.drawStack)
+export function drawStackTopCard(state) {
+  return topCard(state.drawStack);
 }
 
-export const drawStackAnyCards = state => {
-  return helpers.anyCards(state.drawStack)
+export function drawStackAnyCards(state) {
+  return anyCards(state.drawStack);
 }

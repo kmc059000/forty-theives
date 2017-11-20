@@ -5,16 +5,16 @@
 </template>
 
 <script>
-import store from './store/index'
-import Game from './components/Game'
+import store from './store/index';
+import Game from './components/Game';
 
 export default {
   name: 'app',
   store,
   components: {
-    Game
-  }
-}
+    Game,
+  },
+};
 </script>
 
 <style>

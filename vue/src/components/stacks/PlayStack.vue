@@ -8,26 +8,26 @@
 </template>
 
 <script>
-  import Card from './Card'
-  import * as helpers from '../../store/helpers'
+  import Card from './Card';
+  import * as helpers from '../../store/helpers';
 
   export default {
     props: ['stack', 'index'],
     components: {
-      Card
+      Card,
     },
     computed: {
-      anyCards () {
-        return helpers.anyCards(this.stack)
+      anyCards() {
+        return helpers.anyCards(this.stack);
       },
-      cards () {
-        return this.stack
-      }
+      cards() {
+        return this.stack;
+      },
     },
     methods: {
-      select () {
-        this.$store.dispatch('selectPlayStack', this.index)
-      }
-    }
-  }
+      select() {
+        this.$store.dispatch('selectPlayStack', this.index);
+      },
+    },
+  };
 </script>

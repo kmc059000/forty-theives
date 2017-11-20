@@ -10,34 +10,34 @@
     name: 'card',
     props: ['card', 'index'],
     computed: {
-      suitClasses () {
-        var obj = {
+      suitClasses() {
+        const obj = {
           card: true,
-          'selectedCard': this.card.selected
-        }
+          selectedCard: this.card.selected,
+        };
 
         if (this.card) {
-          obj[this.card.cardSuit] = true
+          obj[this.card.cardSuit] = true;
         }
 
-        return obj
+        return obj;
       },
-      numberClasses () {
-        var obj = {
-          cardsize: true
-        }
+      numberClasses() {
+        const obj = {
+          cardsize: true,
+        };
 
         if (this.card) {
-          obj['_' + this.card.cardNumber] = true
+          obj[`_${this.card.cardNumber}`] = true;
         }
 
-        return obj
+        return obj;
       },
-      offset () {
-        return (this.index * 25) + 'px'
-      }
-    }
-  }
+      offset() {
+        return `${(this.index * 25)}px`;
+      },
+    },
+  };
 </script>
 <style scoped>
 

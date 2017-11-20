@@ -8,21 +8,22 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
-  import DropStack from '../stacks/DropStack'
-  import DrawStack from '../stacks/DrawStack'
-  import DiscardStack from '../stacks/DiscardStack'
+  import { mapState } from 'vuex';
+  import DropStack from '../stacks/DropStack';
+  import DrawStack from '../stacks/DrawStack';
+  import DiscardStack from '../stacks/DiscardStack';
+
   export default {
     name: 'top-stacks',
     components: {
       DrawStack,
       DiscardStack,
-      DropStack
+      DropStack,
     },
     computed: mapState([
       'drawStack',
       'discardStack',
-      'dropStacks'
-    ])
-  }
+      'dropStacks',
+    ]),
+  };
 </script>

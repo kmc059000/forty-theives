@@ -9,25 +9,25 @@
 </template>
 
 <script>
-  import Card from './Card'
+  import Card from './Card';
 
   export default {
     components: {
-      Card
+      Card,
     },
     props: ['stack'],
     computed: {
-      anyCards: function () {
-        return !!this.stack.length
+      anyCards() {
+        return !!this.stack.length;
       },
-      card: function () {
-        return this.$store.getters.discardStackTopCard
-      }
+      card() {
+        return this.$store.getters.discardStackTopCard;
+      },
     },
     methods: {
-      select () {
-        this.$store.dispatch('selectDiscardStack')
-      }
-    }
-  }
+      select() {
+        this.$store.dispatch('selectDiscardStack');
+      },
+    },
+  };
 </script>

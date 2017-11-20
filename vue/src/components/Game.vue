@@ -7,20 +7,20 @@
 </template>
 
 <script>
-import Actions from './Actions'
-import TopStacks from './containers/TopStacks'
-import BottomStacks from './containers/BottomStacks'
+import Actions from './Actions';
+import TopStacks from './containers/TopStacks';
+import BottomStacks from './containers/BottomStacks';
 
 export default {
   components: {
     Actions,
     TopStacks,
-    BottomStacks
+    BottomStacks,
   },
-  created () {
-    this.$store.dispatch('deal')
-  }
-}
+  created() {
+    this.$store.dispatch('deal');
+  },
+};
 </script>
 
 <style>

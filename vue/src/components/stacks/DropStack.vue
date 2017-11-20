@@ -6,26 +6,26 @@
 </template>
 
 <script>
-  import Card from './Card'
-  import * as helpers from '../../store/helpers'
+  import Card from './Card';
+  import * as helpers from '../../store/helpers';
 
   export default {
     props: ['stack', 'index'],
     components: {
-      Card
+      Card,
     },
     computed: {
-      anyCards: function () {
-        return helpers.anyCards(this.stack)
+      anyCards() {
+        return helpers.anyCards(this.stack);
       },
-      card: function () {
-        return helpers.topCard(this.stack)
-      }
+      card() {
+        return helpers.topCard(this.stack);
+      },
     },
     methods: {
-      select () {
-        this.$store.dispatch('selectDropStack', this.index)
-      }
-    }
-  }
+      select() {
+        this.$store.dispatch('selectDropStack', this.index);
+      },
+    },
+  };
 </script>

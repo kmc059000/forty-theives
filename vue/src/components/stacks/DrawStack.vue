@@ -6,18 +6,19 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import { mapActions } from 'vuex';
+
   export default {
     props: ['stack'],
     computed: {
-      anyCards: function () {
-        return !!this.stack.length
-      }
+      anyCards() {
+        return !!this.stack.length;
+      },
     },
     methods: {
-      ...mapActions(['drawCard'])
-    }
-  }
+      ...mapActions(['drawCard']),
+    },
+  };
 </script>
 <style scoped>
   .cardBack {
