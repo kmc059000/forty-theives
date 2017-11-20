@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :class="{'discardStack': true, 'selectedCard' : this.discardStack.selected }"
+    <div :class="{'discardStack': true, 'selectedCard' : this.stack.selected }"
         @click="select">
         <card v-if="anyCards" :card="card">
         </card>
@@ -9,23 +9,20 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
   import Card from './Card'
 
   export default {
     components: {
       Card
     },
+    props: ['stack'],
     computed: {
       anyCards: function () {
-        return this.$store.getters.discardStackAnyCards
+        return !!this.stack.length
       },
       card: function () {
         return this.$store.getters.discardStackTopCard
-      },
-      ...mapState([
-        'discardStack'
-      ])
+      }
     },
     methods: {
       select () {
