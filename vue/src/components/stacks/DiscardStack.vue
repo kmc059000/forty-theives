@@ -1,7 +1,7 @@
 <template>
   <div>
     <div :class="{'discardStack': true, 'selectedCard' : this.stack.selected }"
-        @click="select">
+        @click="select" @dblclick="autoMove">
         <card v-if="anyCards" :card="card">
         </card>
     </div>
@@ -28,6 +28,7 @@
     methods: {
       ...mapActions({
         select: 'selectDiscardStack',
+        autoMove: 'autoMoveDiscardStack',
       }),
     },
   };

@@ -2,7 +2,7 @@ import { range } from 'lodash';
 import { flow, shuffle } from 'lodash/fp';
 
 export function topCard(stack) {
-  return stack.length && stack[stack.length - 1];
+  return stack && stack.length && stack[stack.length - 1];
 }
 
 export function anyCards(stack) {

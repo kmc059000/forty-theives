@@ -1,6 +1,6 @@
 <template>
   <div class="cardStack">
-    <div @click="select">
+    <div @click="select" @dblclick="autoMove">
         <card v-for="(card, index) in cards" :card="card" :index="index" :key="`card-${card.cardSuit}-${card.cardNumber}`">
         </card>
     </div>
@@ -22,9 +22,12 @@
       },
     },
     methods: {
-      ...mapActions(['selectPlayStack']),
+      ...mapActions(['selectPlayStack', 'autoMovePlayStack']),
       select() {
         this.selectPlayStack(this.index);
+      },
+      autoMove() {
+        this.autoMovePlayStack(this.index);
       },
     },
   };
