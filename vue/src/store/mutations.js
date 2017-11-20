@@ -1,9 +1,9 @@
-import _ from 'lodash';
+import { assign, cloneDeep, omit, range } from 'lodash';
 import * as helpers from './helpers';
 
 export function deal(state) {
-  state.playStacks = _.map(_.range(10), () => []);
-  state.dropStacks = _.map(_.range(8), () => []);
+  state.playStacks = range(10).map(() => []);
+  state.dropStacks = range(8).map(() => []);
   state.discardStack = [];
   state.drawStack = [];
   state.score = 0;
@@ -110,14 +110,14 @@ export function deselect(state) {
 // UNDO Handling
 export function undo(state) {
   const newState = state.history.pop();
-  _.assign(state, newState);
+  assign(state, newState);
 
   deselect(state);
 }
 
 function storeState(state) {
-  const copyableState = _.omit(state, ['history']);
-  const clone = _.cloneDeep(copyableState);
+  const copyableState = omit(state, ['history']);
+  const clone = cloneDeep(copyableState);
   state.history.push(clone);
 }
 

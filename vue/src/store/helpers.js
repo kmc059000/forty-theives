@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import { range } from 'lodash';
+import { flow, shuffle } from 'lodash/fp';
 
 export function topCard(stack) {
   return stack.length && stack[stack.length - 1];
@@ -36,9 +37,9 @@ export function generateDeck() {
 
   let deck = [];
 
-  _.forEach(_.range(2), () => {
-    _.forEach(consts.cardNumbers, (cardNumber) => {
-      _.forEach(consts.cardSuits, (cardSuit) => {
+  range(2).forEach(() => {
+    consts.cardNumbers.forEach((cardNumber) => {
+      consts.cardSuits.forEach((cardSuit) => {
         deck.push({
           cardNumber,
           cardSuit,
@@ -49,11 +50,11 @@ export function generateDeck() {
   });
 
   // one shuffle didnt seem all that random. Similar cards seemed to be right next to each other
-  deck = _(deck)
-    .shuffle()
-    .shuffle()
-    .shuffle()
-    .value();
+  deck = flow(
+    shuffle,
+    shuffle,
+    shuffle,
+  )(deck);
 
   return deck;
 }
