@@ -91,6 +91,8 @@ export function selectDropStack(state, dropStackIndex) {
     } else {
       selectCard(state, card, dropStack);
     }
+  } else {
+    selectCard(state, card, dropStack);
   }
 }
 
