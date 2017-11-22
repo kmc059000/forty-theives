@@ -10,6 +10,9 @@ export const selectPlayStack = ({ commit }, index) => commit('selectPlayStack', 
 export const selectDropStack = ({ commit }, index) => commit('selectDropStack', index);
 export const undo = ({ commit }) => commit('undo');
 
+export const setSuitMode = ({ commit }, mode) => commit('setSuitMode', mode);
+export const setCycleMode = ({ commit }, mode) => commit('setCycleMode', mode);
+
 export function autoMove({ state, commit }, { card, selectCardFn }) {
   // search drop stacks
   const dropStack = flow(

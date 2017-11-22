@@ -130,3 +130,11 @@ function move(state, card, newStack) {
 
   deselect(state);
 }
+
+export function setSuitMode(state, mode) {
+  state.twoSuits = mode === 2;
+}
+
+export function setCycleMode(state, mode) {
+  state.cycleMode = !!mode;
+}

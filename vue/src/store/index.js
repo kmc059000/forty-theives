@@ -20,6 +20,9 @@ const state = {
   timer: null,
   startTime: null,
   score: 0,
+
+  twoSuits: false,
+  cycleMode: false,
 };
 
 const store = new Vuex.Store({

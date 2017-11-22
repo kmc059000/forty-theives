@@ -21,3 +21,8 @@ export function drawStackTopCard(state) {
 export function drawStackAnyCards(state) {
   return anyCards(state.drawStack);
 }
+
+
+export function canChangeSettings(state) {
+  return state.history.length === 0;
+}
