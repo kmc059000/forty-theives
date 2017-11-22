@@ -3,6 +3,8 @@
       <div :class="numberClasses">
         <card-number :card="card" class="tl"></card-number>
         <card-number :card="card" class="tr"></card-number>
+        <card-suit :card="card" top></card-suit>
+        <card-suit :card="card" bottom></card-suit>
         <card-number :card="card" class="bl"></card-number>
         <card-number :card="card" class="br"></card-number>
       </div>
@@ -11,11 +13,13 @@
 
 <script>
   import CardNumber from './CardNumber';
+  import CardSuit from './CardSuit';
 
   export default {
     name: 'card',
     components: {
       CardNumber,
+      CardSuit,
     },
     props: ['card', 'index'],
     computed: {
@@ -67,24 +71,6 @@
       background-color: White;
       position: absolute;
       background-color: White;
-      background-image: url(/static/sprite.png);
-      background-repeat: no-repeat;
-  }
-
-  .H {
-      background-position: -144px 0px;
-  }
-
-  .S {
-    background-position: 0px 0px;
-  }
-
-  .D {
-      background-position: -72px 0px;
-  }
-
-  .C {
-      background-position: -216px 0px;
   }
 
   .tl {

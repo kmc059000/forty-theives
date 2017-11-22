@@ -11,7 +11,7 @@
   };
 
   export default {
-    name: 'CardNumbe',
+    name: 'CardNumber',
     props: ['card'],
     computed: {
       number() {
