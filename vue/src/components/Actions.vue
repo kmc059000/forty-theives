@@ -55,9 +55,15 @@ export default {
   },
   methods: {
     ...mapActions({
-      newGame: 'deal',
+      deal: 'deal',
       undo: 'undo',
     }),
+    newGame() {
+      // eslint-disable-next-line no-alert
+      if (window.confirm('Are you sure you want to start a new game?')) {
+        this.deal();
+      }
+    },
     updateStatus() {
       const seconds = 1000;
       const minutes = seconds * 60;
