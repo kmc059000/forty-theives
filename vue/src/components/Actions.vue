@@ -10,8 +10,12 @@
       </span>
 
       <label>
-        2 Suits:
-        <input type="checkbox" v-model="twoSuitMode" :disabled="!canChangeSettings" />
+        Difficulty:
+        <select v-model="difficulty" :disabled="!canChangeSettings">
+          <option value="4">4 suits</option>
+          <option value="2">Colors</option>
+          <option value="1">Any Card</option>
+        </select>
       </label>
 
       <label>
@@ -31,11 +35,18 @@ export default {
     return {
       elapsedMins: 0,
       elapsedSecs: 0,
-      twoSuitMode: false,
       cycleDiscards: false,
     };
   },
   computed: {
+    difficulty: {
+      get() {
+        return this.$store.state.difficulty;
+      },
+      set(val) {
+        this.$store.dispatch('setSuitMode', val);
+      },
+    },
     ...mapState([
       'score',
       'startTime',
@@ -68,9 +79,6 @@ export default {
     setInterval(this.updateStatus, 1000);
   },
   watch: {
-    twoSuitMode(val) {
-      this.$store.dispatch('setMode', val ? 2 : 4);
-    },
     cycleDiscards(val) {
       this.$store.dispatch('setCycleMode', !!val);
     },

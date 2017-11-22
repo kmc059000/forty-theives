@@ -21,7 +21,7 @@ const state = {
   startTime: null,
   score: 0,
 
-  twoSuits: false,
+  difficulty: '4',
   cycleMode: false,
 };
 

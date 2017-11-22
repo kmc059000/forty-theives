@@ -1,6 +1,32 @@
 import { range } from 'lodash';
 import { flow, shuffle } from 'lodash/fp';
 
+const suitColors = {
+  // keyed by difficulty
+  1: {
+    C: true,
+    D: true,
+    H: true,
+    S: true,
+  },
+  2: {
+    C: 'black',
+    D: 'red',
+    H: 'red',
+    S: 'black',
+  },
+  4: {
+    C: 'C',
+    D: 'D',
+    H: 'H',
+    S: 'S',
+  },
+};
+
+function matchesSuit(difficulty, card1, card2) {
+  return suitColors[difficulty][card1.cardSuit] === suitColors[difficulty][card2.cardSuit];
+}
+
 export function topCard(stack) {
   return stack && stack.length && stack[stack.length - 1];
 }
@@ -17,8 +43,9 @@ export function popCard(stack) {
   return stack.length && stack.pop();
 }
 
-export function canDropOnOpenCard(sourceCard, card) {
-  return sourceCard.cardNumber - card.cardNumber === 1 && sourceCard.cardSuit === card.cardSuit;
+export function canDropOnOpenCard(difficulty, sourceCard, card) {
+  return sourceCard.cardNumber - card.cardNumber === 1 &&
+    matchesSuit(difficulty, sourceCard, card);
 }
 
 export function canDropOnDropStackCard(sourceCard, card) {
@@ -26,7 +53,8 @@ export function canDropOnDropStackCard(sourceCard, card) {
     return sourceCard.cardNumber === 1;
   }
 
-  return sourceCard.cardNumber - card.cardNumber === 1 && sourceCard.cardSuit === card.cardSuit;
+  return sourceCard.cardNumber - card.cardNumber === 1 &&
+    matchesSuit(4, sourceCard, card);
 }
 
 export function generateDeck() {

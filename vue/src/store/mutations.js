@@ -67,7 +67,7 @@ export function selectPlayStack(state, playStackIndex) {
   if (card) {
     if (card === previousCard) {
       deselect(state);
-    } else if (previousCard && helpers.canDropOnOpenCard(card, previousCard)) {
+    } else if (previousCard && helpers.canDropOnOpenCard(state.difficulty, card, previousCard)) {
       move(state, previousCard, playStack);
     } else {
       selectCard(state, card, playStack);
@@ -136,7 +136,7 @@ function move(state, card, newStack) {
 }
 
 export function setSuitMode(state, mode) {
-  state.twoSuits = mode === 2;
+  state.difficulty = mode;
 }
 
 export function setCycleMode(state, mode) {

@@ -27,7 +27,7 @@ export function autoMove({ state, commit }, { card, selectCardFn }) {
 
   // search playstacks
   const playStack = flow(
-    filter(s => canDropOnOpenCard(topCard(s), card)),
+    filter(s => canDropOnOpenCard(state.difficulty, topCard(s), card)),
     head,
   )(state.playStacks);
   if (playStack) {
