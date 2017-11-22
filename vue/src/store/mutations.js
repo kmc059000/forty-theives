@@ -8,6 +8,7 @@ export function deal(state) {
   state.drawStack = [];
   state.score = 0;
   state.startTime = new Date();
+  state.history = [];
 
   const deck = helpers.generateDeck();
 
@@ -32,6 +33,9 @@ export function drawCard(state) {
   if (card) {
     helpers.pushCard(state.discardStack, card);
     state.score += 1;
+  } else if (state.cycleMode) {
+    state.drawStack = state.discardStack.reverse();
+    state.discardStack = [];
   }
 }
 
