@@ -72,6 +72,8 @@ export function selectPlayStack(state, playStackIndex) {
     } else {
       selectCard(state, card, playStack);
     }
+  } else if (previousCard && previousCard.cardNumber === 13) {
+    move(state, previousCard, playStack);
   }
 }
 

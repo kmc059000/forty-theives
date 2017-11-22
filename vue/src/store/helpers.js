@@ -44,6 +44,11 @@ export function popCard(stack) {
 }
 
 export function canDropOnOpenCard(difficulty, sourceCard, card) {
+  if (!card) {
+    // allow moving kings to empty play stacks
+    return sourceCard.cardNumber === 13;
+  }
+
   return sourceCard.cardNumber - card.cardNumber === 1 &&
     matchesSuit(difficulty, sourceCard, card);
 }
