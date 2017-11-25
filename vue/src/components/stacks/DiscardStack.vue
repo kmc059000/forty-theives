@@ -1,7 +1,7 @@
 <template>
   <div>
     <div :class="{'discardStack': true, 'selectedCard' : this.stack.selected }"
-        @click="select" @dblclick="autoMove">
+        @click.left="select" @click.right.prevent="autoMove">
         <card v-if="anyCards" :card="card">
         </card>
     </div>

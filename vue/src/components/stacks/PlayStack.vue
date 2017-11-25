@@ -1,5 +1,5 @@
 <template>
-  <div class="cardStack" @click="select" @dblclick="autoMove">
+  <div class="cardStack" @click.left="select" @click.right.prevent="autoMove">
     <div>
         <card v-for="(card, index) in cards" :card="card" :index="index" :key="`card-${card.cardSuit}-${card.cardNumber}`">
         </card>
