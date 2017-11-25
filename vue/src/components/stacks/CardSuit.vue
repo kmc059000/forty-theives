@@ -1,10 +1,10 @@
 <template>
-  <div class="suit" :class="bottom ? 'bottom' : top ? 'top' : ''">
+  <div class="suit" :class="[bottom ? 'bottom' : top ? 'top' : '', suit, difficultyClass]">
     <svg v-if="suit === 'H'"
        version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
         x="0px" y="0px" viewBox="0 0 336 316" enable-background="new 0 0 336 316" xml:space="preserve">
-        <path id="svg_2" d="m325.673,115.563c-9.712,35.554 -30.536,64.376 -55.441,90.498c-34.404,36.084 -69.285,71.714 -103.981,107.52c-0.353,0.365 -0.971,0.474 0.016,0.018c-38.472,-39.119 -77.022,-77.382 -114.463,-116.703c-26.691,-28.032 -47.264,-60.57 -49.745,-100.082c-2.047,-32.598 10.676,-61.229 38.064,-80.666c24.892,-17.665 52.642,-18.292 79.936,-6.213c25.407,11.244 36.902,33.926 43.557,59.544c0.582,2.239 1.181,4.473 2.158,8.172c3.071,-10.215 4.962,-18.911 8.258,-27.037c12.465,-30.734 36.319,-47.865 68.591,-49.968c28.013,-1.827 56.415,13.551 74.153,44.642c15.047,26.376 9.318,68.735 8.897,70.275z" fill="#ED1C24" clip-rule="evenodd" fill-rule="evenodd"/>/>
+        <path id="svg_2" d="m325.673,115.563c-9.712,35.554 -30.536,64.376 -55.441,90.498c-34.404,36.084 -69.285,71.714 -103.981,107.52c-0.353,0.365 -0.971,0.474 0.016,0.018c-38.472,-39.119 -77.022,-77.382 -114.463,-116.703c-26.691,-28.032 -47.264,-60.57 -49.745,-100.082c-2.047,-32.598 10.676,-61.229 38.064,-80.666c24.892,-17.665 52.642,-18.292 79.936,-6.213c25.407,11.244 36.902,33.926 43.557,59.544c0.582,2.239 1.181,4.473 2.158,8.172c3.071,-10.215 4.962,-18.911 8.258,-27.037c12.465,-30.734 36.319,-47.865 68.591,-49.968c28.013,-1.827 56.415,13.551 74.153,44.642c15.047,26.376 9.318,68.735 8.897,70.275z" clip-rule="evenodd" fill-rule="evenodd"/>/>
       </svg>
 
     <svg v-if="suit === 'C'"
@@ -26,12 +26,14 @@
       version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
       xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
       x="0px" y="0px" viewBox="0 0 326 386" enable-background="new 0 0 326 386" xml:space="preserve">
-      <path id="svg_4" d="m161.099,5.087c0,0 112.564,135.628 152.711,183.682c0,0 -152.709,192.084 -153.82,192.084c-1.494,-2.583 -156.13,-191.982 -156.13,-191.982l157.239,-183.784z" fill="#ED1C24" clip-rule="evenodd" fill-rule="evenodd"/>
+      <path id="svg_4" d="m161.099,5.087c0,0 112.564,135.628 152.711,183.682c0,0 -152.709,192.084 -153.82,192.084c-1.494,-2.583 -156.13,-191.982 -156.13,-191.982l157.239,-183.784z" clip-rule="evenodd" fill-rule="evenodd"/>
     </svg>
   </div>
 </template>
 
 <script>
+  import { mapState } from 'vuex';
+
   export default {
     name: 'CardSuit',
     props: {
@@ -40,8 +42,17 @@
       bottom: { default: false, type: Boolean },
     },
     computed: {
+      ...mapState(['difficulty']),
       suit() {
         return this.card && this.card.cardSuit;
+      },
+      difficultyClass() {
+        switch (this.difficulty) {
+          case '1': return 'one-color';
+          case '2': return 'two-colors';
+          default:
+          case '4': return 'four-colors';
+        }
       },
     },
   };
@@ -61,5 +72,37 @@
     transform:
     rotate(180deg)
     translate(100%, 110%);
+  }
+  .suit.H svg > path {
+    fill: #ED1C24;
+  }
+  .suit.C svg > path {
+    fill: #0000FF;
+  }
+  .suit.S svg > path {
+    fill: #000000;
+  }
+  .suit.D svg > path {
+    fill: #00FF00;
+  }
+
+  .suit.C.two-colors svg > path {
+    fill: #000000;
+  }
+  .suit.D.two-colors svg > path {
+    fill: #ED1C24;
+  }
+
+  .suit.H.one-color svg > path {
+    fill: #000000;
+  }
+  .suit.C.one-color svg > path {
+    fill: #000000;
+  }
+  .suit.S.one-color svg > path {
+    fill: #000000;
+  }
+  .suit.D.one-color svg > path {
+    fill: #000000;
   }
 </style>
