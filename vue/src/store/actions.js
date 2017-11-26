@@ -35,6 +35,8 @@ export function autoMove({ state, commit }, { card, selectCardFn }) {
     selectCardFn();
     commit('selectPlayStack', destinationIndex);
   }
+
+  commit('deselect');
 }
 
 export function autoMovePlayStack({ commit, state, dispatch }, index) {
